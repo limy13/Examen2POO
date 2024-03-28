@@ -7,10 +7,11 @@ public class Menu {
         Scanner doubleRead = new Scanner (System.in); //scanner double
         Scanner intRead = new Scanner (System.in); //scanner int
         Zoo zoo = new Zoo(); //acceso a la clase Zoo
-        int option;
+        int option, id;
 
         do {
-            System.out.println("\n*** BIENVENIDO AL PROGRAMA ***\n");
+            System.out.println("\n");
+            System.out.println("*** BIENVENIDO AL PROGRAMA ***\n");
             System.out.println("1. Registrar empleado");
             System.out.println("2. Mostrar informacion de empleados");
             System.out.println("3. Registrar visitante");
@@ -22,6 +23,7 @@ public class Menu {
             System.out.println("9. Salir");
             System.out.print("\nIngrese opción: ");
             option = intRead.nextInt();
+            System.out.println("\n");
 
             switch (option) {
 
@@ -30,40 +32,31 @@ public class Menu {
                     System.out.println("\n---- Employee information ----\n");
                     System.out.print("Nombre: ");
                     String name = string.nextLine();
-
                     System.out.print("Apellidos: ");
                     String lastName = string.nextLine();
-
                     System.out.print("Fecha de nacimiento (DD-MM-YYYY): ");
                     String birthdate = string.nextLine();
-
                     System.out.print("Fecha de ingreso como trabajador (DD-MM-YYYY): ");
                     String admissionDate = string.nextLine();
-
                     System.out.print("RFC: ");
                     String rfc = string.nextLine();
-
                     System.out.print("CURP: ");
                     String curp = string.nextLine();
-
                     System.out.print("Salario: ");
                     double salary = doubleRead.nextDouble();
-
                     System.out.print("Horario (Dias y horas): ");
                     String schedule = string.nextLine();
-
                     System.out.print("Rol: ");
                     String rol = string.nextLine();
-
                     // Crear el objeto empleado con los datos ingresados y agregarlo al ArrayList
-                    Employee employee = new Employee(name, lastName, birthdate, admissionDate, rfc, curp.toUpperCase(),
+                    Employee employee = new Employee(name, lastName, birthdate, admissionDate, rfc.toUpperCase(), curp.toUpperCase(),
                             salary, schedule, rol);
                     zoo.addEmployee(employee); // agrega al empleado
                     break;
                     
                 case 2:
                     // mostrar info de todos los empleados 
-                    System.out.println("1. Show employees info"); //mostrar todos los empleados
+                    System.out.println("\n1. Show employees info"); //mostrar todos los empleados
                     System.out.println("2. Consult employee"); // mostrar un empleado en especifico
                     System.out.print("\nChoose a option: ");
                     int decision = intRead.nextInt();
@@ -71,30 +64,27 @@ public class Menu {
                         zoo.showEmployees();
                     }
                     else{
-                        System.out.print("\nEnter the RFC of the employee you want to consult: ");
-                        rfc = string.nextLine();
-                        zoo.consultEmployee(rfc);
+                        System.out.print("\nEnter the ID of the employee you want to consult: ");
+                        id = intRead.nextInt();
+                        zoo.consultEmployee(id);
                     }
                     break;
 
                 case 3:
    
                     // Aqui seria la opcion 3.- Registrar visitante
-
                     System.out.println("\n---- Visitor information ----\n");
                     System.out.print("Name: ");
                     name = string.nextLine();
-                    System.out.println("Last name: ");
+                    System.out.print("Last name: ");
                     lastName = string.nextLine();
                     System.out.print("Birthdate (DD-MM-YYYY): ");
                     birthdate = string.nextLine();
-                    System.out.println("CURP: ");
+                    System.out.print("CURP: ");
                     curp = string.nextLine();
-                    System.out.println("Number of visits: ");
-                    int numberVisits = intRead.nextInt();
-                    System.out.println("Admission date (DD-MM-YYYY): ");
+                    System.out.print("Admission date (DD-MM-YYYY): ");
                     admissionDate = string.nextLine();
-                    Visitor visitor = new Visitor(name, lastName, birthdate, curp.toUpperCase(), numberVisits, admissionDate);
+                    Visitor visitor = new Visitor(name, lastName, birthdate, curp.toUpperCase(), admissionDate);
                     zoo.addVisitor(visitor);
                     break;
 
@@ -102,26 +92,27 @@ public class Menu {
                 
                     // Aqui seria la opcion 4.- Mostrar informacion del visitante
 
-                    System.out.println("1. Show visitors info"); //mostrar todos los animales
+                    System.out.println("\n1. Show visitors info"); //mostrar todos los animales
                     System.out.println("2. Consult visitor"); // mostrar un animal en especifico
                     System.out.print("\nChoose a option: ");
                     decision = intRead.nextInt();
-                    if (decision == 1){
+                    if (decision == 1) {
                         zoo.showVisitors();
                     }
-                    else{
-                        System.out.print("\nEnter the CURP of the visitor you want to consult: ");
-                        curp = string.nextLine();
-                        zoo.consultVisitor(curp.toUpperCase());
+                    else {
+                        System.out.print("\nEnter the ID of the visitor you want to consult: ");
+                        id = intRead.nextInt();
+                        zoo.consultVisitor(id);
                     }
-
-
-
                     break;
 
                 case 5:
-                    System.out.println("Haz seleccionado la opcion 5 \n");
+
                     // Aqui seria la opcion 5.- Registrar visita al zoo
+
+                    Visit visit = new Visit();
+                    visit.addVisitors();
+                    zoo.addVisit(visit);
                     break;
 
                 case 6:
@@ -129,7 +120,7 @@ public class Menu {
                     // Aqui seria la opcion 6.- Registrar animal
 
                     System.out.println("\n---- Animal information ----\n");
-                    System.out.print("\nKind: ");
+                    System.out.print("Kind: ");
                     String kind = string.nextLine();
                     System.out.print("Arrival date (DD-MM-YYYY): ");
                     String arrivalDate = string.nextLine();
@@ -147,15 +138,14 @@ public class Menu {
                     if (decision == 1){
                         vaccines = true;
                     }
-                    int animalId = zoo.getAnimalId();
-                    Animal animal = new Animal(kind, arrivalDate, typeFood, birthdate, weight, feedingFrequency, vaccines, animalId);
+                    Animal animal = new Animal(kind, arrivalDate, typeFood, birthdate, weight, feedingFrequency, vaccines);
                     System.out.print("Diseases? (1 = yes): "); //pregunta si tiene enfermedades en caso de no tenerlas
                     decision = intRead.nextInt();
                     if (decision == 1){
                         do{
                         System.out.print("Disease: "); 
                         String disease = string.nextLine();
-                        animal.diseases(disease);
+                        animal.setDiseases(disease);
                         System.out.print("\nAdd another disease? (1 = yes): ");
                         decision = intRead.nextInt();
                         }
@@ -168,7 +158,7 @@ public class Menu {
 
                     // Aqui seria la opcion 7.- Mostrar info animal
 
-                    System.out.println("1. Show animals info"); //mostrar todos los animales
+                    System.out.println("\n1. Show animals info"); //mostrar todos los animales
                     System.out.println("2. Consult animal"); // mostrar un animal en especifico
                     System.out.print("\nChoose a option: ");
                     decision = intRead.nextInt();
@@ -177,7 +167,7 @@ public class Menu {
                     }
                     else{
                         System.out.print("\nEnter the ID of the animal you want to consult: ");
-                        animalId = intRead.nextInt();
+                        int animalId = intRead.nextInt();
                         zoo.consultAnimal(animalId);
                     }
                     break;

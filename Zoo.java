@@ -4,13 +4,18 @@ class Zoo {
 
     // ESTA CLASE SE UTILIZZA PARA GUARDAR VISITANTES, EMPLEADOS, ANIMALES, ETC ADEMAS DE MOSTRAR DICHOS OBJETOS.
     
-    private int id;
     private ArrayList<Employee> employees = new ArrayList<Employee>(); // ArrayList para almacenar empleados
     private ArrayList<Animal> animals = new ArrayList<Animal>(); // ArrayList para almacenar animales
     private ArrayList<Visitor> visitors = new ArrayList<Visitor>(); // ArrayList para almacenar visitantes
+    private ArrayList<Employee> guides = new ArrayList<Employee>(); // ArrayList para almacenar empleados guias
+    private ArrayList<Visit> visit = new ArrayList<Visit>(); // ArrayList para almacenar empleados guias
+
 
     void addEmployee(Employee newEmployee){ //esta funcion agrega un empleado
         employees.add(newEmployee);
+        if (newEmployee.getRol().equalsIgnoreCase("Guide")){
+            guides.add(newEmployee);
+        }
         System.out.println("\nSuccessful registration\n");
     }
 
@@ -21,6 +26,11 @@ class Zoo {
 
     void addVisitor(Visitor newVisitor){ //esta funcion agrega un visitante
         visitors.add(newVisitor);
+        System.out.println("\nSuccessful registration\n");
+    }
+
+    void addVisit(Visit newVisit) { //para registrar visitas
+        visit.add(newVisit);
         System.out.println("\nSuccessful registration\n");
     }
 
@@ -38,16 +48,17 @@ class Zoo {
         }
     }
 
-    void consultEmployee(String rfc){ //info de un empleado en especifico
+    void consultEmployee(int employeeId){ //info de un empleado en especifico
         boolean band = false;
         for (Employee i : employees){
-            if (rfc.equals(i.getRfc())){
+            if (employeeId == i.getId()){
+                System.out.println("\n---- Employee ----\n");
                 System.out.println(i.employeeGetData());
                 band = true;
             }
         }
         if (band == false){
-            System.out.println("This RFC does not belong to any employee");
+            System.out.println("\nThis ID does not belong to any employee\n");
         }
     }
 
@@ -65,21 +76,43 @@ class Zoo {
         }
     }
 
-    int getAnimalId(){
+    int getEmployeeId(){
+        int id = 0;
         id++;
         return id;
     }
+
+    int getAnimalId(){
+        int id = 0;
+        id++;
+        return id;
+    }
+
+    int getVisitorId(){
+        int id = 0;
+        id++;
+        return id;
+    }
+
+    ArrayList<Employee> getGuides(){ //obtiene la lista de guias
+        return guides;
+    }
+
+    ArrayList<Visitor> getVisitors(){ 
+        return visitors;
+    } 
 
     void consultAnimal(int animalId){ //info de un animal en especifico
         boolean band = false;
         for (Animal i : animals){
             if (animalId == i.getAnimalId()){
+                System.out.println("\n---- Animal ----\n");
                 System.out.println(i.getData());
                 band = true;
             }
         }
         if (band == false){
-            System.out.println("This ID does not belong to any animal");
+            System.out.println("\nThis ID does not belong to any animal\n");
         }
     }
 
@@ -97,16 +130,17 @@ class Zoo {
         }
     }
 
-    void consultVisitor(String curp){ //info de un animal en especifico
+    void consultVisitor(int visitorId){ //info de un animal en especifico
         boolean band = false;
         for (Visitor i : visitors){
-            if (curp.equals(i.getCurp())){
+            if (visitorId == i.getId()){
+                System.out.println("\n---- Visitor ----\n");
                 System.out.println(i.visitorGetData());
                 band = true;
             }
         }
         if (band == false){
-            System.out.println("This CURP does not belong to any visitor");
+            System.out.println("\nThis ID does not belong to any visitor\n");
         }
     }
 }

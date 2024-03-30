@@ -1,11 +1,11 @@
 class Employee {
   
-    private Zoo zoo = new Zoo();
-    private String name, lastName, birthdate, admissionDate, rfc, curp, schedule, rol;
+    private String name, lastName, birthdate, admissionDate, rfc, curp, rol;
+    private String [][] schedule;
     private double salary;
     private int id;
     
-    public Employee(String name, String lastName, String birthdate, String dateAdmission, String rfc, String curp, double salary, String schedule, String rol) {
+    public Employee(String name, String lastName, String birthdate, String dateAdmission, String rfc, String curp, double salary, String [][] schedule, String rol, int id) {
         this.name = name;
         this.lastName = lastName;
         this.birthdate = birthdate;
@@ -15,20 +15,39 @@ class Employee {
         this.salary = salary;
         this.schedule = schedule;
         this.rol = rol;
-        this.id = zoo.getEmployeeId();
+        this.id = id;
     }
 
-    int getId(){ //obtiene id
+    String getName() {
+        return name;
+    }
+
+    String getLastName() {
+        return lastName;
+    }
+
+    int getId() { //obtiene id
         return id;
     }
 
-    String getRol(){
+    String getRol() {
         return rol;
     }
-    
-    String employeeGetData(){ //datos de empleado 
-        return String.format("Nombre: %s %s \nID: %d \nFecha de nacimiento: %s \nFecha de ingreso: %s \nRFC: %s \nCURP: %s \nSalario: %.2f \nHorario: %s \nRol: %s",
-            this.name, this.lastName, this.id, this.birthdate, this.admissionDate, this.rfc, this.curp, this.salary, this.schedule, this.rol);
+
+    String [][] getSchedule() {
+        return schedule;
+    }
+
+    void printSchedule() {
+        System.out.println("\n---- Horario ----\n");
+        for(int x = 0; x < 7; x++) {
+            System.out.println(schedule[0][x] + ": " + schedule[1][x]);
+        }
+    }
+
+    String employeeGetData() { //datos de empleado 
+        return String.format("Nombre: %s %s \nID: %d \nFecha de nacimiento: %s \nFecha de ingreso: %s \nRFC: %s \nCURP: %s \nSalario: %.2f \nRol: %s",
+            this.name, this.lastName, this.id, this.birthdate, this.admissionDate, this.rfc, this.curp, this.salary, this.rol);
     }
 }
     

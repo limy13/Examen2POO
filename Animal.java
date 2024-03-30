@@ -8,7 +8,7 @@ class Animal {
     private ArrayList<String> diseases = new ArrayList<String>();
     private boolean hasVaccines;
 
-    public Animal(String typeAnimal, String arrivalDate, String feedingType, String birthdate, String weight, String feedingFrequency, boolean hasVaccines){
+    public Animal(String typeAnimal, String arrivalDate, String feedingType, String birthdate, String weight, String feedingFrequency, boolean hasVaccines, int id) {
         this.typeAnimal = typeAnimal;
         this.birthdate = birthdate;
         this.arrivalDate = arrivalDate;
@@ -16,7 +16,7 @@ class Animal {
         this.feedingFrequency = feedingFrequency;
         this.feedingType = feedingType;
         this.hasVaccines = hasVaccines;
-        this.animalId = zoo.getAnimalId();;
+        this.animalId = id;
     }
 
     // Getters y Setters

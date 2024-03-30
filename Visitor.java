@@ -4,13 +4,13 @@ class Visitor {
     private String name, lastName, birthdate, curp, admissionDate;
     private int numberVisits = 0, id, descuento; //NO PODEMOS INGRESAR VISITAS AHORA
     
-    public Visitor (String name, String lastName, String birthdate, String curp, String admissionDate) {
+    public Visitor (String name, String lastName, String birthdate, String curp, String admissionDate, int id) {
         this.name = name;
         this.lastName = lastName;
         this.birthdate = birthdate;
         this.curp = curp;
         this.admissionDate = admissionDate;
-        this.id = zoo.getVisitorId();
+        this.id = id;
     }
 
     int getId() {
@@ -38,15 +38,14 @@ class Visitor {
     }
 
     int getAgeBirthdate() { //obtiene el año de la fecha de nacimiento
-        int age;
         String[] parts = birthdate.split("-");
-        return age = Integer.parseInt(parts[3]);
+        return Integer.parseInt(parts[2]);
     }
 
     int getBirthdate(){
         String date;
         String[] parts = birthdate.split("-");
-        date = parts[2]+parts[1];
+        date = parts[1]+parts[0];
         return Integer.parseInt(date);
     }
 

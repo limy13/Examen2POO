@@ -42,6 +42,12 @@ class Visit {
         System.out.println("\n---- Datos de la visita ----\n");
         System.out.print("Día de la semana en la que se realiza la visita: ");
         visitDay = string.nextLine();
+        if(visitDay.equalsIgnoreCase("Miercoles")) {
+            visitDay = "Miércoles";
+        }
+        else if(visitDay.equalsIgnoreCase("Sabado")) {
+            visitDay = "Sábado";
+        }
         System.out.print("Fecha de la visita (DD-MM-YYYY): ");
         visitDate = string.nextLine();
         System.out.print("Hora de inicio la visita (00:00): ");
@@ -63,8 +69,8 @@ class Visit {
                         if (i.getAgeBirthdate() < age) { //adultos
                             if (getBirthdate() < i.getBirthdate()) { //por si nacio ese año y todavia es un niño
                                 kids++;
-                                if (i.getNumberVisits() == 5) { //por si tienen 5 visitas
-                                    price = 50 - (50 * .2);
+                                if (i.getNumberVisits() == 4) { //por si tienen 5 visitas
+                                    price = 50 - 10;
                                 }
                                 else {   
                                     price = 50;
@@ -72,8 +78,8 @@ class Visit {
                             }
                             else {              //adultos definitivos
                                 adults++;       
-                                if (i.getNumberVisits() == 5) { //si tiene 5 visitas
-                                    price = 100 - (100 * .2);
+                                if (i.getNumberVisits() == 4) { //si tiene 5 visitas
+                                    price = 100 - 20;
                                 }
                                 else {
                                     price = 100;
@@ -82,8 +88,8 @@ class Visit {
                         }
                         else {
                             kids++;
-                            if (i.getNumberVisits() == 5) { //por si tienen 5 visitas
-                                price = 50 - (50 * .2);
+                            if (i.getNumberVisits() == 4) { //por si tienen 5 visitas
+                                price = 50 - 10;
                             }
                             else {   
                                 price = 50;
@@ -117,7 +123,7 @@ class Visit {
         return band1;
     }
 
-    boolean addGuide(String visitDay, String visitHour) {
+    boolean addGuide(String visitDay, String visitHour) { //MODIFICAR EL ARRAY
         boolean band = false;
         if(guides.isEmpty() == false) {
             for(Employee i : guides) {
@@ -137,9 +143,6 @@ class Visit {
                 }
             }
         }
-        //if (band == true) {
-         //   guides.remove(guideDeleted); //VER SI SI SE ELIMINAN
-        //}
         return band;
     }
 
@@ -211,7 +214,7 @@ class Visit {
     }
 
     void getVisitData() {   
-        System.out.println("Fecha de la visita: " + this.visitDate);
+        System.out.println("Fecha de la visita: " + this.visitDay + " " + this.visitDate);
         System.out.println("Hora de la visita: " + this.visitHour);
         System.out.println("ID: " + this.id);                           //CAMBIOS AQUI
         System.out.println("Finalizada: " + this.progress); //CAMBIOS AQUU

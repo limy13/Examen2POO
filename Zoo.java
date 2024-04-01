@@ -16,7 +16,7 @@ class Zoo {
 
     void addEmployee(Employee newEmployee){ //esta funcion agrega un empleado
         employees.add(newEmployee);
-        if (newEmployee.getRol().equalsIgnoreCase("Guia")){
+        if (newEmployee.getRol().equalsIgnoreCase("Guia") || newEmployee.getRol().equalsIgnoreCase("Guía")){ //CAMBIOS AQUI
             guides.add(newEmployee);
         }
         System.out.println("\nRegistro exitoso\n");
@@ -211,7 +211,7 @@ class Zoo {
                 }
             }
             if(band == false) {
-                System.out.println("\nEste ID no pertenece a ninguna visita"); //CAMBIOS AQUI
+                System.out.println("\nEste ID no pertenece a ninguna visita en proceso"); //CAMBIOS AQUI 
             }
             else {
                 busyGuides.remove(guideDeleted);

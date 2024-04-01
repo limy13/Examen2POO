@@ -62,10 +62,9 @@ public class Menu {
                                 String schedule [][] =  {{"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"}, {"", "", "", "", "", "", ""}};
                                 for (int x = 0; x < 7; x++) {
                                     System.out.println(vector[x]);
-                                    System.out.print("Horas de trabajo (00:00-24:00): "); //hacer la matrizz aqui e intentar poner espacios y arreglarlo si falla
+                                    System.out.print("Horas de trabajo (00:00-24:00): "); //hacer la matrizz aqui 
                                     schedule [1][x] = string.nextLine();
                                 }
-                                // Crear el objeto empleado con los datos ingresados y agregarlo al ArrayList
                                 System.out.print("\n¿Cancelar registro? (1 = si), (2 = no): ");
                                 option = intRead.nextInt();
                                 if(option == 1) {

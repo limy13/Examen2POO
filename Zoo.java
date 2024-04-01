@@ -72,6 +72,10 @@ class Zoo {
         this.busyGuides.add(newBusyGuides);
     }
 
+    void setAnimalId() {
+        animalId = 0;
+    }
+
     void showEmployees(){ //muestra info de todos los empleados
         if (employees.isEmpty()){
             System.out.println("\nNo hay empleados registrados\n");
@@ -109,7 +113,7 @@ class Zoo {
         }
         else{ 
             for (Animal i : animals){
-                System.out.println("\n---- Animal " + x + " ----");
+                System.out.println("\n---- Animal " + x + " ----\n"); //CAMBIOS AQUI
                 System.out.println(i.getData());
                 x++;
             }
@@ -188,24 +192,31 @@ class Zoo {
 
     void endVisit(int id) { //verificar esto
         boolean band = false;
-        for (Visit i : visit) {
-            if (id == i.getVisitId()) {
-                for (Employee x : busyGuides) {
-                    if(i.getGuideId() == x.getId()) {
-                        guideDeleted = x;
-                        guides.add(x);
-                        band = true;
-                        System.out.println("Visita finalizada");
+        if(visit.isEmpty()) {
+            System.out.println("\nNo hay visitas registradas");
+            return;
+        }
+        else {
+            for (Visit i : visit) {
+                if (id == i.getVisitId()) {
+                    for (Employee x : busyGuides) {
+                        if(i.getGuideId() == x.getId()) {
+                            guideDeleted = x;
+                            guides.add(x);
+                            i.setProgress(true);
+                            band = true;
+                            System.out.println("\nVisita finalizada"); //CAMBIOS AQUI
+                        }
                     }
                 }
             }
-        }
-        if(band == false) {
-            System.out.println("Este ID no pertenece a ninguna visita");
-        }
-        else {
-            busyGuides.remove(guideDeleted);
-        }
+            if(band == false) {
+                System.out.println("\nEste ID no pertenece a ninguna visita"); //CAMBIOS AQUI
+            }
+            else {
+                busyGuides.remove(guideDeleted);
+            }
+        }    
     }
 
      // METODOS PARA ELIMINAR ANIMALES
@@ -213,32 +224,32 @@ class Zoo {
         for (Animal animal : animals) {
             if (animal.getAnimalId() == animalId) {
                 animals.remove(animal);
-                System.out.println("El animal con ID: " + animalId + " ha sido eliminado.");
+                System.out.println("\nEl animal con ID: " + animalId + " ha sido eliminado.");
                 return;
             }
         }
-        System.out.println("El animal con ID: " + animalId + " no se encuentra");
+        System.out.println("\nEl animal con ID: " + animalId + " no se encuentra");
     }
 
     void deleteEmployee(int employeeId) {
         for (Employee employee : employees) {
             if (employee.getId() == employeeId) {
                 employees.remove(employee);
-                System.out.println("El empleado con ID: " + employeeId + " ha sido eliminado.");
+                System.out.println("\nEl empleado con ID: " + employeeId + " ha sido eliminado.");
                 return;
             }
         }
-        System.out.println("El empleado con ID: " + employeeId + " no se encuentra");
+        System.out.println("\nEl empleado con ID: " + employeeId + " no se encuentra");
     }
 
     void deleteVisitor(int visitorId) {
         for (Visitor visitor : visitors) {
             if (visitor.getId() == visitorId) {
                 visitors.remove(visitor);
-                System.out.println("El Visitante con ID: " + visitorId + " ha sido eliminado.");
+                System.out.println("\nEl Visitante con ID: " + visitorId + " ha sido eliminado.");
                 return;
             }
         }
-        System.out.println("El Visitante con ID: " + visitorId + " no se encuentra");
+        System.out.println("\nEl Visitante con ID: " + visitorId + " no se encuentra");
     }
 }

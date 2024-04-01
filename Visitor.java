@@ -1,6 +1,6 @@
 class Visitor {
 
-    private Zoo zoo = new Zoo();
+    //private Zoo zoo = new Zoo();
     private String name, lastName, birthdate, curp, admissionDate;
     private int numberVisits = 0, id, descuento; //NO PODEMOS INGRESAR VISITAS AHORA
     
@@ -49,9 +49,10 @@ class Visitor {
         return Integer.parseInt(date);
     }
 
+    //CAMBIOS EN EL GET DATA
     String visitorGetData() { //datos de visitante
-        return String.format("\nName: %s %s \nID: %d \nBirthdate: %s \nAdmission date: %s \nCURP: %s \nNumber of visits: %d \nAdmission date: %s",
-            this.name, this.lastName, this.id, this.birthdate, this.admissionDate, this.curp, this.numberVisits, this.admissionDate);
+        return String.format("\nNombre: %s %s \nID: %d \nFecha de nacimiento: %s \nCURP: %s \nNúmero de visitas: %d \nFecha de ingreso: %s", 
+            this.name, this.lastName, this.id, this.birthdate, this.curp, this.numberVisits, this.admissionDate);
     }
 
 }

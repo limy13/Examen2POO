@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class Animal {
 
-    private Zoo zoo = new Zoo();
+    //private Zoo zoo = new Zoo();
     private int animalId;
     private String typeAnimal, birthdate, arrivalDate, feedingFrequency, feedingType;;
     private ArrayList<String> diseases = new ArrayList<String>();

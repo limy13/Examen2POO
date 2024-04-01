@@ -66,14 +66,14 @@ public class Menu {
                                     schedule [1][x] = string.nextLine();
                                 }
                                 // Crear el objeto empleado con los datos ingresados y agregarlo al ArrayList
-                                Employee employee = new Employee(name, lastName, birthdate, admissionDate, rfc.toUpperCase(), curp.toUpperCase(),
-                                        salary, schedule, rol, zoo.getEmployeeId());
-                                System.out.print("\n¿Cancelar registro? (1 = si): ");
+                                System.out.print("\n¿Cancelar registro? (1 = si), (2 = no): ");
                                 option = intRead.nextInt();
                                 if(option == 1) {
-                                    System.out.println("Registro cancelado");
+                                    System.out.println("\nRegistro cancelado"); //CAMBIOS AQUI
                                 }
                                 else {
+                                    Employee employee = new Employee(name, lastName, birthdate, admissionDate, rfc.toUpperCase(), curp.toUpperCase(),
+                                    salary, schedule, rol, zoo.getEmployeeId()); //HUBO CAMMBIOS EN ESTA LINEA
                                     zoo.addEmployee(employee); // agrega al empleado
                                 }
                             break;
@@ -108,14 +108,14 @@ public class Menu {
                             curp = string.nextLine();
                             System.out.print("Fecha de ingreso como visitante (DD-MM-YYYY): ");
                             admissionDate = string.nextLine();
-                            Visitor visitor = new Visitor(name, lastName, birthdate, curp.toUpperCase(), admissionDate, zoo.getVisitorId());
-                            System.out.print("\n¿Cancelar registro? (1 = si): ");
+                            System.out.print("\n¿Cancelar registro? (1 = si), (2 = no): ");
                             decision = intRead.nextInt();
-                            if(option == 1) {
-                                System.out.println("Registro cancelado");
+                            if(decision == 1) { //en esta línea hubieron cambios
+                                System.out.println("\nRegistro cancelado"); //en esta linea hubieron cambios
                             }
-                            else {
-                                zoo.addVisitor(visitor); // agrega el visitante
+                            else { //HUBO CAMBIOS EN ESTA LINEA
+                                Visitor visitor = new Visitor(name, lastName, birthdate, curp.toUpperCase(), admissionDate, zoo.getVisitorId());
+                                zoo.addVisitor(visitor); 
                             }            
                             break;
 
@@ -141,8 +141,11 @@ public class Menu {
 
                             // Aqui seria la opcion 5.- Registrar visita al zoo
 
-                            Visit visit = new Visit(zoo.getVisitors(), zoo.getGuides(), zoo.getVisitId());
+                            Visit visit = new Visit(zoo.getVisitors(), zoo.getGuides()); //CAMBIOS AQUII
                             if(visit.addVisitors() == true) {
+                                visit.setId(zoo.getVisitId()); //CAMBIOS AQUI
+                                System.out.println("\n\n---- Datos de la visita ----\n"); //CAMBIOS AQUI
+                                visit.getVisitData();
                                 zoo.setGuides(visit.getGuideDeleted());
                                 zoo.setBusyGuides(visit.getGuideDeleted());
                                 zoo.addVisit(visit);
@@ -196,18 +199,18 @@ public class Menu {
                             double weight = doubleRead.nextDouble(); 
                             System.out.print("Frecuencia de alimentación: ");
                             String feedingFrequency = string.nextLine();
-                            System.out.print("¿Dispone de vacunas? (1 = si): ");
+                            System.out.print("¿Dispone de vacunas? (1 = si), (2 = no): ");
                             decision = intRead.nextInt();
                             boolean vaccines = false; 
                             if (decision == 1){
                                 vaccines = true;
                             }
                             Animal animal = new Animal(kind, arrivalDate, typeFood, birthdate, weight, feedingFrequency, vaccines, zoo.getAnimalId());
-                            System.out.print("¿Padece de alguna enfermedad? (1 = si): "); //pregunta si tiene enfermedades en caso de no tenerlas
+                            System.out.print("¿Padece de alguna enfermedad? (1 = si), (2 = no): "); //pregunta si tiene enfermedades en caso de no tenerlas
                             decision = intRead.nextInt();
                             if (decision == 1){
                                 do{
-                                System.out.print("Enfermedad: "); 
+                                System.out.print("\nEnfermedad: "); //CAMBIOS AQUI
                                 String disease = string.nextLine();
                                 animal.setDiseases(disease);
                                 System.out.print("\n¿Agregar otra enfermedad? (1 = si): ");
@@ -215,10 +218,11 @@ public class Menu {
                                 }
                                 while (decision == 1); //while para agregar las enfermedades que quiera
                             }
-                            System.out.print("\n¿Cancelar registro? (1 = si): ");
+                            System.out.print("\n¿Cancelar registro? (1 = si), (2 = no): ");
                             decision = intRead.nextInt();
-                            if(option == 1) {
-                                System.out.println("Registro cancelado");
+                            if(decision == 1) { //HUBIERON CAMBIOS AQUI
+                                zoo.setAnimalId(); //HUBIERON CAMBIOS AQUI
+                                System.out.println("\nRegistro cancelado"); //CAMBIOS AQUI
                             }
                             else {
                                 zoo.addAnimal(animal); // agrega el animal

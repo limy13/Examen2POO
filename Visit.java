@@ -9,19 +9,19 @@ class Visit {
     Scanner intRead = new Scanner(System.in);
     Scanner string = new Scanner(System.in);
     private ArrayList<Employee> guides = new ArrayList<Employee>(); //contiene los empleaods guias
-    private ArrayList<Visitor> visitortVisitors = new ArrayList<Visitor>(); // contiene a los visitantes
+    private ArrayList<Visitor> visitortoVisitors = new ArrayList<Visitor>(); // contiene a los visitantes
+    private ArrayList<Visitor> visitorsToAdd = new ArrayList<Visitor>(); // contiene a los visitantes para agregar sus visitas
     private ArrayList<String> visitors = new ArrayList<String>(); // contiene a los personas que estan realizando la visita
     private String visitDate, visitHour, guide, visitDay;
     private double totalprice, price;
     private Employee guideDeleted;
-    //AGREGAR VARIABLE EN PROCESO
+    private boolean progress = false; //CAMBIOS AQUI
     private int kids = 0, adults = 0, age, id, guideId;
     private String [][] guideSchedule;
 
-    public Visit(ArrayList<Visitor> visitorsList, ArrayList<Employee> guides, int id) {
-        this.visitortVisitors = visitorsList;
+    public Visit(ArrayList<Visitor> visitorsList, ArrayList<Employee> guides) { //CAMBIOS AQUI
+        this.visitortoVisitors = visitorsList;
         this.guides = guides;
-        this.id = id;
     }
 
     int getAgeVisitDate() { //obtiene el año de la fecha de nacimiento
@@ -47,19 +47,19 @@ class Visit {
         System.out.print("Hora de inicio la visita (00:00): ");
         visitHour = string.nextLine();
         if(addGuide(visitDay, visitHour) == true) {
-        boolean band = false;
         int decision;
 
             do {
-                System.out.print("Ingresa ID del visitante que quieres agregar: ");
+                boolean band = false;
+                System.out.print("\nIngresa ID del visitante que quieres agregar: "); //CAMBIOS AQUI
                 int id = intRead.nextInt();
-                for (Visitor i : visitortVisitors) {
+                for (Visitor i : visitortoVisitors) {
                     if (id == i.getId()) {
                         String x = String.format("\nNombre: %s %s \nID: %d", i.getName(), i.getLastName(), i.getId());
                         visitors.add(x);
                         band = true;
                         age = getAgeVisitDate() - 11;
-                        i.addNumberVisits();
+                        visitorsToAdd.add(i);
                         if (i.getAgeBirthdate() < age) { //adultos
                             if (getBirthdate() < i.getBirthdate()) { //por si nacio ese año y todavia es un niño
                                 kids++;
@@ -95,19 +95,20 @@ class Visit {
                 if (band == false) {
                     System.out.println("\nEste ID no pertenece a ningún visitante\n");
                 }
-                System.out.print("\n¿Agregar otro visitante? (1 = si): ");
+                System.out.print("\n¿Agregar otro visitante? (1 = si), (2 = no): ");
                 decision = intRead.nextInt();
             }
-            while (decision == 1);
-            System.out.println("\n---- Datos de la visita ----\n");
-            getVisitData();
-            System.out.print("\n¿Cancelar visita? (1 = yes): ");
+            while (decision == 1); //CAMBOS AQUI
+            System.out.print("\n¿Cancelar visita? (1 = si), (2 = no): ");
             decision = intRead.nextInt();
             if(decision == 1){
-                System.out.println("Visita cancelada");
+                System.out.println("\nVisita cancelada"); //CAMCIOS AQUI
             }
             else {
                 band1 = true;
+                for (Visitor x : visitorsToAdd) { //CAMBIOS AQUI
+                    x.addNumberVisits();
+                }
             }
         }
         else {
@@ -201,9 +202,19 @@ class Visit {
         }
     }
 
+    void setId(int visitId) { //CAMBIOS AQUI
+        id = visitId;
+    }
+
+    void setProgress(boolean band) {
+        this.progress = band;
+    }
+
     void getVisitData() {   
         System.out.println("Fecha de la visita: " + this.visitDate);
         System.out.println("Hora de la visita: " + this.visitHour);
+        System.out.println("ID: " + this.id);                           //CAMBIOS AQUI
+        System.out.println("Finalizada: " + this.progress); //CAMBIOS AQUU
         System.out.println("Cantidad de niños: " + this.kids);
         System.out.println("Cantidad de adultos: " + this.adults);
         System.out.println("Guía: " + this.guide);

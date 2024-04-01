@@ -14,7 +14,7 @@ public class Menu {
             System.out.println("*** BIENVENIDO AL PROGRAMA ***\n");
             System.out.print("Ingresa la contraseña para acceder al sistema: ");
             String password = string.nextLine();
-            if(password.equalsIgnoreCase("zooMRL24")) {
+            if(password.equals("zooMRL24")) {
                 do {
                     System.out.println("\n");
                     System.out.println("*** ZOO DE MORELIA ***\n");
@@ -40,7 +40,7 @@ public class Menu {
 
                         case 1:
                             // Aqui seria la opcion 1.- Registrar empleado
-                                System.out.println("\n---- Employee information ----\n");
+                                System.out.println("\n---- Información del empleado ----\n");
                                 System.out.print("Nombre: ");
                                 String name = string.nextLine();
                                 System.out.print("Apellidos: ");
@@ -57,7 +57,7 @@ public class Menu {
                                 double salary = doubleRead.nextDouble();
                                 System.out.print("Rol: ");
                                 String rol = string.nextLine();
-                                System.out.println("Ingrese los horarios de trabajo (Dejar vacío si es que no trabaja ese día): ");
+                                System.out.println("\nIngrese los horarios de trabajo (Dejar vacío si es que no trabaja ese día): ");
                                 String [] vector = {"\n---- Lunes ----\n", "\n---- Martes ----\n", "\n---- Miércoles ----\n", "\n---- Jueves ----\n", "\n---- Viernes ----\n", "\n---- Sábado ----\n", "\n---- Domingo ----\n"};
                                 String schedule [][] =  {{"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"}, {"", "", "", "", "", "", ""}};
                                 for (int x = 0; x < 7; x++) {
@@ -68,7 +68,7 @@ public class Menu {
                                 // Crear el objeto empleado con los datos ingresados y agregarlo al ArrayList
                                 Employee employee = new Employee(name, lastName, birthdate, admissionDate, rfc.toUpperCase(), curp.toUpperCase(),
                                         salary, schedule, rol, zoo.getEmployeeId());
-                                System.out.print("¿Cancelar registro? (1 = si): ");
+                                System.out.print("\n¿Cancelar registro? (1 = si): ");
                                 option = intRead.nextInt();
                                 if(option == 1) {
                                     System.out.println("Registro cancelado");
@@ -80,15 +80,15 @@ public class Menu {
                             
                         case 2:
                             // mostrar info de todos los empleados 
-                            System.out.println("\n1. Show employees info"); //mostrar todos los empleados
-                            System.out.println("2. Consult employee"); // mostrar un empleado en especifico
-                            System.out.print("\nChoose a option: ");
+                            System.out.println("\n1. Mostrar información de todos los empleados"); //mostrar todos los empleados
+                            System.out.println("2. Consultar empleado"); // mostrar un empleado en especifico
+                            System.out.print("\nIngrese opción: ");
                             int decision = intRead.nextInt();
                             if (decision == 1){
                                 zoo.showEmployees();
                             }
                             else{
-                                System.out.print("\nEnter the ID of the employee you want to consult: ");
+                                System.out.print("\nIngrese el ID del empleado que quieres consultar: ");
                                 id = intRead.nextInt();
                                 zoo.consultEmployee(id);
                             }
@@ -97,19 +97,19 @@ public class Menu {
                         case 3:
         
                             // Aqui seria la opcion 3.- Registrar visitante
-                            System.out.println("\n---- Visitor information ----\n");
-                            System.out.print("Name: ");
+                            System.out.println("\n---- Información del visitante ----\n");
+                            System.out.print("Nombre: ");
                             name = string.nextLine();
-                            System.out.print("Last name: ");
+                            System.out.print("Apellido: ");
                             lastName = string.nextLine();
-                            System.out.print("Birthdate (DD-MM-YYYY): ");
+                            System.out.print("Fecha de nacimiento (DD-MM-YYYY): ");
                             birthdate = string.nextLine();
                             System.out.print("CURP: ");
                             curp = string.nextLine();
-                            System.out.print("Admission date (DD-MM-YYYY): ");
+                            System.out.print("Fecha de ingreso como visitante (DD-MM-YYYY): ");
                             admissionDate = string.nextLine();
                             Visitor visitor = new Visitor(name, lastName, birthdate, curp.toUpperCase(), admissionDate, zoo.getVisitorId());
-                            System.out.print("¿Cancelar registro? (1 = si): ");
+                            System.out.print("\n¿Cancelar registro? (1 = si): ");
                             decision = intRead.nextInt();
                             if(option == 1) {
                                 System.out.println("Registro cancelado");
@@ -125,13 +125,13 @@ public class Menu {
 
                             System.out.println("\n1. Mostrar información de todos los visitantes"); //mostrar todos los animales
                             System.out.println("2. Consultar visitante"); // mostrar un animal en especifico
-                            System.out.print("\nElige una opción: ");
+                            System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             if (decision == 1) {
                                 zoo.showVisitors();
                             }
                             else {
-                                System.out.print("\nIngresa el ID del visitante que quieres consultar: ");
+                                System.out.print("\nIngrese el ID del visitante que quieres consultar: ");
                                 id = intRead.nextInt();
                                 zoo.consultVisitor(id);
                             }
@@ -143,8 +143,8 @@ public class Menu {
 
                             Visit visit = new Visit(zoo.getVisitors(), zoo.getGuides(), zoo.getVisitId());
                             if(visit.addVisitors() == true) {
-                                zoo.setGuides(visit.getGuidesArray());
-                                zoo.setBusyGuides(visit.getBusyGuides());
+                                zoo.setGuides(visit.getGuideDeleted());
+                                zoo.setBusyGuides(visit.getGuideDeleted());
                                 zoo.addVisit(visit);
                                 System.out.println("\nRegistro exitoso, ¡Disfrute su visita!\n");
                             }
@@ -157,7 +157,7 @@ public class Menu {
 
                             //Finalzar visita
 
-                            System.out.println("Ingrese el ID de la visita que desea finalizar: ");
+                            System.out.print("Ingrese el ID de la visita que desea finalizar: ");
                             id = intRead.nextInt();
                             zoo.endVisit(id);
                             break;
@@ -166,13 +166,13 @@ public class Menu {
                             
                             System.out.println("\n1. Mostrar información de las visitas realizadas"); //mostrar todos los animales
                             System.out.println("2. Consultar visita"); // mostrar un animal en especifico
-                            System.out.print("\nElige una opción: ");
+                            System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             if (decision == 1) {
                                 zoo.showVisits();
                             }
                             else {
-                                System.out.print("\nIngresa el ID de la visita que quieres consultar: ");
+                                System.out.print("\nIngrese el ID de la visita que quieres consultar: ");
                                 id = intRead.nextInt();
                                 zoo.consulVisit(id);
                             }
@@ -183,39 +183,39 @@ public class Menu {
 
                             // Aqui seria la opcion 6.- Registrar animal
                         
-                            System.out.println("\n---- Animal information ----\n");
-                            System.out.print("Kind: ");
+                            System.out.println("\n---- Información del animal ----\n");
+                            System.out.print("Especie: ");
                             String kind = string.nextLine();
-                            System.out.print("Arrival date (DD-MM-YYYY): ");
+                            System.out.print("Fecha de llegada (DD-MM-YYYY): ");
                             String arrivalDate = string.nextLine();
-                            System.out.print("Type of food: ");
+                            System.out.print("Tipo de alimentación: ");
                             String typeFood = string.nextLine();
-                            System.out.print("Birthdate (DD-MM-YYYY): ");
+                            System.out.print("Fecha de nacimiento (DD-MM-YYYY): ");
                             birthdate = string.nextLine();
-                            System.out.print("Weight: ");
-                            String weight = string.nextLine();
-                            System.out.print("Feeding frequency: ");
+                            System.out.print("Peso: ");
+                            double weight = doubleRead.nextDouble(); 
+                            System.out.print("Frecuencia de alimentación: ");
                             String feedingFrequency = string.nextLine();
-                            System.out.print("Vaccines? (1 = true): ");
+                            System.out.print("¿Dispone de vacunas? (1 = si): ");
                             decision = intRead.nextInt();
                             boolean vaccines = false; 
                             if (decision == 1){
                                 vaccines = true;
                             }
                             Animal animal = new Animal(kind, arrivalDate, typeFood, birthdate, weight, feedingFrequency, vaccines, zoo.getAnimalId());
-                            System.out.print("Diseases? (1 = yes): "); //pregunta si tiene enfermedades en caso de no tenerlas
+                            System.out.print("¿Padece de alguna enfermedad? (1 = si): "); //pregunta si tiene enfermedades en caso de no tenerlas
                             decision = intRead.nextInt();
                             if (decision == 1){
                                 do{
-                                System.out.print("Disease: "); 
+                                System.out.print("Enfermedad: "); 
                                 String disease = string.nextLine();
                                 animal.setDiseases(disease);
-                                System.out.print("\nAdd another disease? (1 = yes): ");
+                                System.out.print("\n¿Agregar otra enfermedad? (1 = si): ");
                                 decision = intRead.nextInt();
                                 }
                                 while (decision == 1); //while para agregar las enfermedades que quiera
                             }
-                            System.out.print("¿Cancelar registro? (1 = si): ");
+                            System.out.print("\n¿Cancelar registro? (1 = si): ");
                             decision = intRead.nextInt();
                             if(option == 1) {
                                 System.out.println("Registro cancelado");
@@ -229,15 +229,15 @@ public class Menu {
 
                             // Aqui seria la opcion 7.- Mostrar info animal
 
-                            System.out.println("\n1. Show animals info"); //mostrar todos los animales
-                            System.out.println("2. Consult animal"); // mostrar un animal en especifico
-                            System.out.print("\nChoose a option: ");
+                            System.out.println("\n1. Mostrar información de todos los animales"); //mostrar todos los animales
+                            System.out.println("2. Consultar animal"); // mostrar un animal en especifico
+                            System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             if (decision == 1){
                                 zoo.showAnimals();
                             }
                             else{
-                                System.out.print("\nEnter the ID of the animal you want to consult: ");
+                                System.out.print("\nIngrese el ID del animal que quieres consultar: ");
                                 int animalId = intRead.nextInt();
                                 zoo.consultAnimal(animalId);
                             }
@@ -249,9 +249,9 @@ public class Menu {
                             break;
 
                         case 11:
-                            System.out.println("1. Eliminar animal");
+                            System.out.println("\n1. Eliminar animal");
                             System.out.println("2. Modificar animal");
-                            System.out.print("\n Elegir opcion: ");
+                            System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             switch(decision) {
                                 
@@ -265,7 +265,7 @@ public class Menu {
                                     break;
         
                                 default:
-                                    System.out.println("Selecciona un ID que exista, por favor.");
+                                    System.out.println("\nSelecciona un ID que exista, por favor.");
                                     break;
                             }
                             break;
@@ -273,7 +273,7 @@ public class Menu {
                         case 12:
                             System.out.println("1. Eliminar Empleado");
                             System.out.println("2. Modificar Empleado");
-                            System.out.print("\n Elegir opcion: ");
+                            System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             switch(decision) {
 
@@ -289,7 +289,7 @@ public class Menu {
                                     break;
         
                                 default:
-                                    System.out.println("Selecciona un ID que exista, por favor.");
+                                    System.out.println("\nSelecciona un ID que exista, por favor.");
                                     break;
                             }
                             break;
@@ -297,7 +297,7 @@ public class Menu {
                         case 13:
                             System.out.println("1. Eliminar Visitante");
                             System.out.println("2. Modificar Visitante");
-                            System.out.print("\n Elegir opcion: ");
+                            System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             switch(decision) {
                                 
@@ -309,7 +309,7 @@ public class Menu {
                                     break;
         
                                 default:
-                                    System.out.println("Selecciona un ID que exista, por favor.");
+                                    System.out.println("\nSelecciona un ID que exista, por favor.");
                                     break;
                             }
                             break;
@@ -327,7 +327,7 @@ public class Menu {
                 System.out.println("\nContraseña incorrecta");
                 System.out.println("\n1. Intentar de nuevo");
                 System.out.println("2. Salir");
-                System.out.print("Elija una opción: ");
+                System.out.print("\nIngrese opción: ");
                 y = intRead.nextInt();
             }
         }

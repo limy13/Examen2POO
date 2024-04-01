@@ -11,6 +11,7 @@ class Zoo {
     private ArrayList<Employee> busyGuides = new ArrayList<Employee>(); //guias ocupados
     private ArrayList<Visit> visit = new ArrayList<Visit>(); // ArrayList para almacenar visitas
     private int employeeId = 0, animalId = 0, vistorId = 0, visitId = 0;
+    private Employee guideDeleted ; 
 
 
     void addEmployee(Employee newEmployee){ //esta funcion agrega un empleado
@@ -63,12 +64,12 @@ class Zoo {
         return visitors;
     } 
 
-    void setGuides(ArrayList<Employee> newGuides) {
-        this.guides = newGuides;
+    void setGuides(Employee newGuides) {
+        this.guides.remove(newGuides);
     }
 
-    void setBusyGuides(ArrayList<Employee> newBusyGuides) {
-        this.busyGuides = newBusyGuides;
+    void setBusyGuides(Employee newBusyGuides) {
+        this.busyGuides.add(newBusyGuides);
     }
 
     void showEmployees(){ //muestra info de todos los empleados
@@ -186,15 +187,24 @@ class Zoo {
     }
 
     void endVisit(int id) { //verificar esto
+        boolean band = false;
         for (Visit i : visit) {
             if (id == i.getVisitId()) {
                 for (Employee x : busyGuides) {
                     if(i.getGuideId() == x.getId()) {
-                        busyGuides.remove(x);
+                        guideDeleted = x;
                         guides.add(x);
+                        band = true;
+                        System.out.println("Visita finalizada");
                     }
                 }
             }
+        }
+        if(band == false) {
+            System.out.println("Este ID no pertenece a ninguna visita");
+        }
+        else {
+            busyGuides.remove(guideDeleted);
         }
     }
 

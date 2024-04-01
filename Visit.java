@@ -9,7 +9,6 @@ class Visit {
     Scanner intRead = new Scanner(System.in);
     Scanner string = new Scanner(System.in);
     private ArrayList<Employee> guides = new ArrayList<Employee>(); //contiene los empleaods guias
-    private ArrayList<Employee> busyGuides = new ArrayList<Employee>();
     private ArrayList<Visitor> visitortVisitors = new ArrayList<Visitor>(); // contiene a los visitantes
     private ArrayList<String> visitors = new ArrayList<String>(); // contiene a los personas que estan realizando la visita
     private String visitDate, visitHour, guide, visitDay;
@@ -126,8 +125,8 @@ class Visit {
                     if(visitDay.equalsIgnoreCase(guideSchedule[0][x])) {
                         boolean band1 = true;
                         if (guideSchedule[1][x].isEmpty() == false) {
-                            if(geVisitHour(visitHour) >= getHours(guideSchedule[1][x], band1) && geVisitHour(visitHour) < getHours(guideSchedule[1][x], band1 = false)) { //puede fallar en la condicion
-                                guideId =i.getId();
+                            if(geVisitHour(visitHour) >= getHours(guideSchedule[1][x], band1) && geVisitHour(visitHour) <= getHours(guideSchedule[1][x], band1 = false)) { //puede fallar en la condicion
+                                guideId = i.getId();
                                 guide = String.format("%s %s \nID del guía: %d",  i.getName(), i.getLastName(), guideId);   
                                 guideDeleted = i;
                                 band = true;
@@ -137,20 +136,19 @@ class Visit {
                 }
             }
         }
-        if (band == true) {
-            guides.remove(guideDeleted); //VER SI SI SE ELIMINAN
-            busyGuides.add(guideDeleted);
-        }
+        //if (band == true) {
+         //   guides.remove(guideDeleted); //VER SI SI SE ELIMINAN
+        //}
         return band;
     }
 
-    int geVisitHour(String hour) { //aqui podria fallar la variable visit hour
+    int geVisitHour(String hour) { 
         String [] parts = hour.split(":");
         return Integer.parseInt(parts[0] + parts[1]);
     }
 
     int getHours(String schedule, boolean band) {
-        String hour1, hour2;
+        String hour, hour1, hour2;
         int startHour, finalHour;
         String[] parts = schedule.split("-");
         hour1 = parts[0];
@@ -158,25 +156,39 @@ class Visit {
         String[] hour1Parts = hour1.split(":");
         startHour = Integer.parseInt(hour1Parts[0] + hour1Parts[1]);
         String[] hour2Parts = hour2.split(":");
-        finalHour = Integer.parseInt(hour2Parts[0] + hour2Parts[1]);
         if (band == true) {
             return startHour;
         }
         else{
+            if (Integer.parseInt(hour2Parts[1]) == 30) {
+                hour2Parts[1] = "00";
+                finalHour = Integer.parseInt(hour2Parts[0] + hour2Parts[1]);
+            } 
+            else if (Integer.parseInt(hour2Parts[1]) < 30) {
+                hour = String.valueOf(60 - (30 - Integer.parseInt(hour2Parts[1]))); //podria fallar esto
+                hour2Parts[0] = String.valueOf(Integer.parseInt(hour2Parts[0]) - 1);
+                if (hour2Parts[0].length() == 1) {
+                    hour2Parts[0] = "0" + hour2Parts[0];
+                }
+                finalHour = Integer.parseInt(hour2Parts[0] + hour);
+            }
+            else {
+                hour = String.valueOf(Integer.parseInt(hour2Parts[1]) - 30);
+                if (hour.length() == 1) { //podria fallar el length
+                    hour = "0" + hour;
+                }
+                finalHour = Integer.parseInt(hour2Parts[0] + hour);                     //necesito poner paraque sean 2 digitos porque me puede dar 4
+            }
             return finalHour;
         }
     }
 
     int getGuideId() {
-        return getGuideId();
+        return guideId;
     }
 
-    ArrayList<Employee> getGuidesArray() {
-        return guides;
-    }
-
-    ArrayList<Employee> getBusyGuides() {
-        return busyGuides;
+    Employee getGuideDeleted() {
+        return guideDeleted;
     }
 
     int getVisitId() {
@@ -197,10 +209,7 @@ class Visit {
         System.out.println("Guía: " + this.guide);
         System.out.println("Precio total: " + this.totalprice + " MX");
         System.out.println("\n---- Visitantes ----");
-        printVisitors();
-       
+        printVisitors();   
     }
-    //guides = guide;
-    //ArrayList<Employee> guide
 }
 

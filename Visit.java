@@ -54,7 +54,6 @@ class Visit {
         visitHour = string.nextLine();
         if(addGuide(visitDay, visitHour) == true) {
         int decision;
-
             do {
                 boolean band = false;
                 System.out.print("\nIngresa ID del visitante que quieres agregar: "); //CAMBIOS AQUI
@@ -132,7 +131,7 @@ class Visit {
                     if(visitDay.equalsIgnoreCase(guideSchedule[0][x])) {
                         boolean band1 = true;
                         if (guideSchedule[1][x].isEmpty() == false) {
-                            if(geVisitHour(visitHour) >= getHours(guideSchedule[1][x], band1) && geVisitHour(visitHour) <= getHours(guideSchedule[1][x], band1 = false)) { //puede fallar en la condicion
+                            if(getVisitHour(visitHour) >= getHours(guideSchedule[1][x], band1) && getVisitHour(visitHour) <= getHours(guideSchedule[1][x], band1 = false)) { //puede fallar en la condicion
                                 guideId = i.getId();
                                 guide = String.format("%s %s \nID del guía: %d",  i.getName(), i.getLastName(), guideId);   
                                 guideDeleted = i;
@@ -146,7 +145,7 @@ class Visit {
         return band;
     }
 
-    int geVisitHour(String hour) { 
+    int getVisitHour(String hour) { 
         String [] parts = hour.split(":");
         return Integer.parseInt(parts[0] + parts[1]);
     }

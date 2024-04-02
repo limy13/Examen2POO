@@ -9,8 +9,11 @@ class Zoo {
     private ArrayList<Visitor> visitors = new ArrayList<Visitor>(); // ArrayList para almacenar visitantes
     private ArrayList<Employee> guides = new ArrayList<Employee>(); // ArrayList para almacenar empleados guias
     private ArrayList<Employee> busyGuides = new ArrayList<Employee>(); //guias ocupados
+    private ArrayList<Employee> maintenanceEmployee = new ArrayList<Employee>(); // ArrayList para almacenar empleados de mantenimiento //HUBO CAMBIOS AQUI 
+    private ArrayList<Employee> busyMaintenance = new ArrayList<Employee>(); // ArrayList para almacenar empleados de mantenimiento //HUBO CAMBIOS AQUI 
+    private ArrayList<Maintenance> maintenance = new ArrayList<Maintenance>(); // ArrayList para almacenar mantenimiento //HUBO CAMBIOS AQUI 
     private ArrayList<Visit> visit = new ArrayList<Visit>(); // ArrayList para almacenar visitas
-    private int employeeId = 0, animalId = 0, vistorId = 0, visitId = 0;
+    private int employeeId = 0, animalId = 0, vistorId = 0, visitId = 0, maintenanceId = 0;
     private Employee guideDeleted ; 
 
 
@@ -18,6 +21,9 @@ class Zoo {
         employees.add(newEmployee);
         if (newEmployee.getRol().equalsIgnoreCase("Guia") || newEmployee.getRol().equalsIgnoreCase("Guía")){ //CAMBIOS AQUI
             guides.add(newEmployee);
+        }
+        else if (newEmployee.getRol().equalsIgnoreCase("Mantenimiento")) { //HUBO CAMBIOS AQUI
+            maintenanceEmployee.add(newEmployee);
         }
         System.out.println("\nRegistro exitoso\n");
     }
@@ -34,6 +40,11 @@ class Zoo {
 
     void addVisit(Visit newVisit) { //para registrar visitas
         visit.add(newVisit);
+    }
+
+    void addMainteance(Maintenance newMaintenance) {
+        this.maintenance.add(newMaintenance);
+        System.out.println("\nRegistro exitoso\n");
     }
 
     int getEmployeeId(){
@@ -56,6 +67,19 @@ class Zoo {
         return visitId;
     }
 
+    int getMaintenanceId(){
+        maintenanceId++;
+        return maintenanceId;
+    }
+
+    ArrayList<Animal> getAnimals(){ //obtiene la lista de los animales
+        return animals;
+    }
+
+    ArrayList<Employee> getMaintenance(){ //obtiene la lista de mantenimiento
+        return maintenanceEmployee;
+    }
+
     ArrayList<Employee> getGuides(){ //obtiene la lista de guias
         return guides;
     }
@@ -63,6 +87,14 @@ class Zoo {
     ArrayList<Visitor> getVisitors(){ 
         return visitors;
     } 
+
+    void setMaintenanceEmployee(Employee newMaintenanceEmployee) {
+        this.maintenanceEmployee.remove(newMaintenanceEmployee);
+    }
+
+    void setBusyMaintenance(Employee newBusyMaintenance) {
+        this.busyGuides.add(newBusyMaintenance);
+    }
 
     void setGuides(Employee newGuides) {
         this.guides.remove(newGuides);
@@ -169,7 +201,7 @@ class Zoo {
         }
         else{ 
             for (Visit i : visit){
-                System.out.println("\n\n---- Visit " + x + " ----\n");
+                System.out.println("\n\n---- Visita " + x + " ----\n");
                 i.getVisitData();
                 x++;
             }
@@ -180,13 +212,41 @@ class Zoo {
         boolean band = false;
         for (Visit i : visit){
             if (visitId == i.getVisitId()){
-                System.out.println("\n\n---- Visit ----\n");
+                System.out.println("\n\n---- Visita ----\n");
                 i.getVisitData();
                 band = true;
             }
         }
         if (band == false){
             System.out.println("\nEste ID no pertenece a ninguna visita\n");
+        }
+    }
+
+    void showMaintenance(){ //muestra info de todos los mantenimientos
+        int x = 1;
+        if (maintenance.isEmpty()){
+            System.out.println("\nNo hay mantenimientos registrados\n");
+        }
+        else{ 
+            for (Maintenance i : maintenance){
+                System.out.println("\n---- Mantenimiento " + x + " ----\n"); 
+                System.out.println(i.getData());
+                x++;
+            }
+        }
+    }
+
+    void consulMaintenance(int id){ //info de un mantenimiento en especifico
+        boolean band = false;
+        for (Maintenance i : maintenance){
+            if (id == i.getId()){
+                System.out.println("\n\n---- Mantenimiento ----\n");
+                i.getData();
+                band = true;
+            }
+        }
+        if (band == false){
+            System.out.println("\nEste ID no pertenece a ningún mantenimiento realizado\n");
         }
     }
 

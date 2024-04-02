@@ -4,13 +4,13 @@ class Animal {
 
     //private Zoo zoo = new Zoo();
     private int animalId;
-    private String typeAnimal, birthdate, arrivalDate, feedingFrequency, feedingType;;
+    private String animalType, birthdate, arrivalDate, feedingFrequency, feedingType;;
     private ArrayList<String> diseases = new ArrayList<String>();
     private boolean hasVaccines;
     private double weight;
 
     public Animal(String typeAnimal, String arrivalDate, String feedingType, String birthdate, double weight, String feedingFrequency, boolean hasVaccines, int id) {
-        this.typeAnimal = typeAnimal;
+        this.animalType = typeAnimal;
         this.birthdate = birthdate;
         this.arrivalDate = arrivalDate;
         this.weight = weight;
@@ -21,6 +21,10 @@ class Animal {
     }
 
     // Getters y Setters
+
+    String getAnimalType() {
+        return animalType;
+    }
 
     void setDiseases(String disease){ //lista de enferemedades
         diseases.add(disease);
@@ -33,11 +37,11 @@ class Animal {
     String getData(){
         if (diseases.isEmpty()){
             return String.format("Animal ID: %d \nTipo de Animal: %s \nFecha de nacimiento: %s \nFecha de ingreso: %s \nPeso: %.2f kg \nEnfermedades: No diseases \nFrecuencia de alimentación: %s \nTipo de alimentación: %s \nCuenta con vacunas: %s\n",
-             animalId, typeAnimal, birthdate, arrivalDate, weight, feedingFrequency, feedingType, hasVaccines);
+             animalId, animalType, birthdate, arrivalDate, weight, feedingFrequency, feedingType, hasVaccines);
         }
         else{
             return String.format("Animal ID: %s \nTipo de Animal: %s \nFecha de nacimiento: %s \nFecha de ingreso: %s \nPeso: %.2f kg \nEnfermedades: %s \nFrecuencia de alimentación: %s \nTipo de alimentación: %s \nCuenta con vacunas: %b\n",
-             animalId, typeAnimal, birthdate, arrivalDate, weight, diseases, feedingFrequency, feedingType, hasVaccines);
+             animalId, animalType, birthdate, arrivalDate, weight, diseases, feedingFrequency, feedingType, hasVaccines);
         }
     }
         

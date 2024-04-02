@@ -28,10 +28,12 @@ public class Menu {
                     System.out.println("8. Registrar animal");
                     System.out.println("9. Mostrar informacion del animal");
                     System.out.println("10. Realizar mantenimiento de animal");
-                    System.out.println("11. Eliminar o modificar datos de un Animal");
-                    System.out.println("12. Eliminar o modificar datos de un Empleado");
-                    System.out.println("13. Eliminar o modificar datos de un Visitante");
-                    System.out.println("14. Salir");
+                    System.out.println("11. Finalizar mantenimiento");
+                    System.out.println("12. Mostrar información de mantenimientos realizados");
+                    System.out.println("13. Eliminar o modificar datos de un Animal");
+                    System.out.println("14. Eliminar o modificar datos de un Empleado");
+                    System.out.println("14. Eliminar o modificar datos de un Visitante");
+                    System.out.println("16. Salir");
                     System.out.print("\nIngrese opción: ");
                     option = intRead.nextInt();
                     System.out.println("\n");
@@ -212,7 +214,7 @@ public class Menu {
                                 System.out.print("\nEnfermedad: "); //CAMBIOS AQUI
                                 String disease = string.nextLine();
                                 animal.setDiseases(disease);
-                                System.out.print("\n¿Agregar otra enfermedad? (1 = si): ");
+                                System.out.print("\n¿Agregar otra enfermedad? (1 = si), (2 = no): ");
                                 decision = intRead.nextInt();
                                 }
                                 while (decision == 1); //while para agregar las enfermedades que quiera
@@ -241,17 +243,49 @@ public class Menu {
                             }
                             else{
                                 System.out.print("\nIngrese el ID del animal que quieres consultar: ");
-                                int animalId = intRead.nextInt();
-                                zoo.consultAnimal(animalId);
+                                id = intRead.nextInt();
+                                zoo.consultAnimal(id);
                             }
                             break;
 
                         case 10:
                             // Aqui seria la opcion 8.- Realizar mantenimiento del animal
+
+                            Maintenance maintenance = new Maintenance(zoo.getMaintenance(), zoo.getAnimals());
+                            maintenance.addMainteance();
+                            if (maintenance.getBand() == true) {
+                                if(maintenance.addMaintenenceEmployee() == true) {
+                                    maintenance.setId(zoo.getMaintenanceId());
+                                    zoo.setMaintenanceEmployee(maintenance.getMaintenanceDeleted());
+                                    zoo.setBusyMaintenance(maintenance.getMaintenanceDeleted());
+                                    zoo.addMainteance(maintenance);
+                                }
+                            }
                             
                             break;
 
-                        case 11:
+                        case 11: 
+
+                            //finalizar mantenimiento
+                            break;
+
+                        case 12: 
+
+                            System.out.println("\n1. Mostrar información de todos los mantenimientos"); //mostrar todos los mantenimientos
+                            System.out.println("2. Consultar algún mantenimiento"); // mostrar un mantenimiento en especifico
+                            System.out.print("\nIngrese opción: ");
+                            decision = intRead.nextInt();
+                            if (decision == 1){
+                                zoo.showMaintenance();
+                            }
+                            else{
+                            System.out.print("\nIngrese el ID del mantenimiento que quieres consultar: ");
+                            id = intRead.nextInt();
+                            zoo.consulMaintenance(id);
+                            }  
+                            break;
+
+                        case 13:
                             System.out.println("\n1. Eliminar animal");
                             System.out.println("2. Modificar animal");
                             System.out.print("\nIngrese opción: ");
@@ -273,7 +307,7 @@ public class Menu {
                             }
                             break;
 
-                        case 12:
+                        case 14:
                             System.out.println("1. Eliminar Empleado");
                             System.out.println("2. Modificar Empleado");
                             System.out.print("\nIngrese opción: ");
@@ -297,7 +331,7 @@ public class Menu {
                             }
                             break;
 
-                        case 13:
+                        case 15:
                             System.out.println("1. Eliminar Visitante");
                             System.out.println("2. Modificar Visitante");
                             System.out.print("\nIngrese opción: ");
@@ -317,14 +351,14 @@ public class Menu {
                             }
                             break;
 
-                        case 14:
-                            y = 14;
+                        case 16:
+                            y = 16;
                             // Opcion.- Salir
                             break;
 
                     }
 
-                } while (option != 14);
+                } while (option != 16);
             }
             else {
                 System.out.println("\nContraseña incorrecta");

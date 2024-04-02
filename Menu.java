@@ -257,7 +257,7 @@ public class Menu {
                                 maintenance.setId(zoo.getMaintenanceId());
                                 zoo.setMaintenanceEmployee(maintenance.getMaintenanceDeleted());
                                 zoo.setBusyMaintenance(maintenance.getMaintenanceDeleted());
-                                System.out.println("\n---- Datos sobre el mantenimiento ----\n");
+                                System.out.println("\n\n---- Datos sobre el mantenimiento ----\n");
                                 System.out.println(maintenance.getData());
                                 zoo.addMainteance(maintenance);
                             }

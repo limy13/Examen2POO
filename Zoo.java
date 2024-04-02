@@ -14,7 +14,7 @@ class Zoo {
     private ArrayList<Maintenance> maintenance = new ArrayList<Maintenance>(); // ArrayList para almacenar mantenimiento //HUBO CAMBIOS AQUI 
     private ArrayList<Visit> visit = new ArrayList<Visit>(); // ArrayList para almacenar visitas
     private int employeeId = 0, animalId = 0, vistorId = 0, visitId = 0, maintenanceId = 0;
-    private Employee guideDeleted ; 
+    private Employee guideDeleted, maintenanceDeleted ; 
 
 
     void addEmployee(Employee newEmployee){ //esta funcion agrega un empleado
@@ -93,7 +93,7 @@ class Zoo {
     }
 
     void setBusyMaintenance(Employee newBusyMaintenance) {
-        this.busyGuides.add(newBusyMaintenance);
+        this.busyMaintenance.add(newBusyMaintenance);
     }
 
     void setGuides(Employee newGuides) {
@@ -236,12 +236,12 @@ class Zoo {
         }
     }
 
-    void consulMaintenance(int id){ //info de un mantenimiento en especifico
+    void consulMaintenance(int id) { //info de un mantenimiento en especifico
         boolean band = false;
         for (Maintenance i : maintenance){
             if (id == i.getId()){
                 System.out.println("\n\n---- Mantenimiento ----\n");
-                i.getData();
+                System.out.println(i.getData());
                 band = true;
             }
         }
@@ -275,6 +275,35 @@ class Zoo {
             }
             else {
                 busyGuides.remove(guideDeleted);
+            }
+        }    
+    }
+
+    void endMaintenance(int id) { //verificar esto
+        boolean band = false;
+        if(maintenance.isEmpty()) {
+            System.out.println("\nNo hay mantenimientos registrados");
+            return;
+        }
+        else {
+            for (Maintenance i : maintenance) {
+                if (id == i.getId()) {
+                    for(Employee x : busyMaintenance) {
+                        if(i.getEmployeeId() == x.getId()) {
+                            maintenanceDeleted = x;
+                            maintenanceEmployee.add(x);
+                            i.setProgress(true);
+                            band = true;
+                            System.out.println("\nMantenimiento finalizado"); //CAMBIOS AQUI
+                        }
+                    }
+                }
+            }
+            if(band == false) {
+                System.out.println("\nEste ID no pertenece a ningún mantenimiento en proceso"); //CAMBIOS AQUI 
+            }
+            else {
+                busyMaintenance.remove(maintenanceDeleted);
             }
         }    
     }

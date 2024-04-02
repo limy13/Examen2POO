@@ -11,7 +11,7 @@ class Maintenance {
     private ArrayList<Animal> animals = new ArrayList<>();
     private Employee maintenanceDeleted;
     private String [][] guideSchedule;
-    private boolean band2 = false;
+    private boolean band2 = false, progress = false;
 
     public Maintenance(ArrayList<Employee> maintenance, ArrayList<Animal> animals) {
         this.maintenance = maintenance;
@@ -32,6 +32,9 @@ class Maintenance {
         date = string.nextLine();
         System.out.print("Hora de inicio del mantenimiento (00:00): ");
         hour = string.nextLine();
+        if(addMaintenenceEmployee() == false) {
+            return;
+        }
         System.out.print("ID del animal al que se le realiza el mantenimiento: ");
         id = intRead.nextInt();
         boolean band = false;
@@ -88,9 +91,17 @@ class Maintenance {
             }
         }
         if (band == false) {
-            System.out.println("\nNo hay empleados de mantenimiento disponibles");
+            System.out.println("\nNo hay empleados de mantenimiento disponibles en este momento");
         }
         return band;
+    }
+
+    void setProgress(boolean band) {
+        progress = band;
+    }
+
+    int getEmployeeId() {
+        return employeeId;
     }
 
     Employee getMaintenanceDeleted() {
@@ -142,7 +153,7 @@ class Maintenance {
             else {
                 hour3 = String.valueOf(Integer.parseInt(hour2Parts[1]) - 30);
                 if (hour3.length() == 1) { 
-                    hour3 = "0" + hour;
+                    hour3 = "0" + hour3;
                 }
                 finalHour = Integer.parseInt(hour2Parts[0] + hour3);                   
             }
@@ -152,7 +163,7 @@ class Maintenance {
 
     String getData() {
         return String.format("Fecha en que se aplicó el proceso: %s %s \nHora de inicio del mantenimiento: %s"
-        + "\nID del mantenimiento: %d \nEspecie: %s \nEmpleado encargado del mantenimiento: %s \nProceso que se realizó: %s \nObservaciones: %s",
-        this.day, this.date, this.hour, this.id, this.animal, this.employee, this.activity, this.observations);
+        + "\nID del mantenimiento: %d \nEspecie: %s \nEmpleado encargado del mantenimiento: %s \nProceso que se realizó: %s \nFinalizado: %b \nObservaciones: %s",
+        this.day, this.date, this.hour, this.id, this.animal, this.employee, this.activity, this.progress, this.observations);
     }
 }

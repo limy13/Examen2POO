@@ -254,19 +254,20 @@ public class Menu {
                             Maintenance maintenance = new Maintenance(zoo.getMaintenance(), zoo.getAnimals());
                             maintenance.addMainteance();
                             if (maintenance.getBand() == true) {
-                                if(maintenance.addMaintenenceEmployee() == true) {
-                                    maintenance.setId(zoo.getMaintenanceId());
-                                    zoo.setMaintenanceEmployee(maintenance.getMaintenanceDeleted());
-                                    zoo.setBusyMaintenance(maintenance.getMaintenanceDeleted());
-                                    zoo.addMainteance(maintenance);
-                                }
+                                maintenance.setId(zoo.getMaintenanceId());
+                                zoo.setMaintenanceEmployee(maintenance.getMaintenanceDeleted());
+                                zoo.setBusyMaintenance(maintenance.getMaintenanceDeleted());
+                                System.out.println("\n---- Datos sobre el mantenimiento ----\n");
+                                System.out.println(maintenance.getData());
+                                zoo.addMainteance(maintenance);
                             }
-                            
                             break;
 
                         case 11: 
 
-                            //finalizar mantenimiento
+                            System.out.print("Ingrese el ID del mantenimiento que desea finalizar: ");
+                            id = intRead.nextInt();
+                            zoo.endMaintenance(id);;
                             break;
 
                         case 12: 
@@ -368,7 +369,7 @@ public class Menu {
                 y = intRead.nextInt();
             }
         }
-        System.out.println("\nSaliendo del programa.... ¡Hasta luego!");
+        System.out.println("\nSaliendo del programa.... ¡Hasta luego!\n");
     }
 }
 

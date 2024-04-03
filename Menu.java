@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Menu {
@@ -7,8 +9,10 @@ public class Menu {
         Scanner string = new Scanner(System.in); //scanner strings
         Scanner doubleRead = new Scanner (System.in); //scanner double
         Scanner intRead = new Scanner (System.in); //scanner int
+        Scanner booleanRead = new Scanner (System.in); //scanner boolean
         Zoo zoo = new Zoo(); //acceso a la clase Zoo
         int option, id;
+
         for(int y = 1; y == 1; ) {
             System.out.println("\n");
             System.out.println("*** BIENVENIDO AL PROGRAMA ***\n");
@@ -152,9 +156,6 @@ public class Menu {
                                 zoo.addVisit(visit);
                                 System.out.println("\nRegistro exitoso, ¡Disfrute su visita!\n");
                             }
-                            //obetenr datos sobre esto
-                            //zoo.getGuides()
-                            //corregir arrays
                             break;
 
                         case 6:
@@ -203,13 +204,13 @@ public class Menu {
                             System.out.print("¿Dispone de vacunas? (1 = si), (2 = no): ");
                             decision = intRead.nextInt();
                             boolean vaccines = false; 
-                            if (decision == 1){
+                            if(decision == 1){
                                 vaccines = true;
                             }
                             Animal animal = new Animal(kind, arrivalDate, typeFood, birthdate, weight, feedingFrequency, vaccines, zoo.getAnimalId());
                             System.out.print("¿Padece de alguna enfermedad? (1 = si), (2 = no): "); //pregunta si tiene enfermedades en caso de no tenerlas
                             decision = intRead.nextInt();
-                            if (decision == 1){
+                            if(decision == 1){
                                 do{
                                 System.out.print("\nEnfermedad: "); //CAMBIOS AQUI
                                 String disease = string.nextLine();
@@ -217,7 +218,7 @@ public class Menu {
                                 System.out.print("\n¿Agregar otra enfermedad? (1 = si), (2 = no): ");
                                 decision = intRead.nextInt();
                                 }
-                                while (decision == 1); //while para agregar las enfermedades que quiera
+                                while(decision == 1); //while para agregar las enfermedades que quiera
                             }
                             System.out.print("\n¿Cancelar registro? (1 = si), (2 = no): ");
                             decision = intRead.nextInt();
@@ -238,7 +239,7 @@ public class Menu {
                             System.out.println("2. Consultar animal"); // mostrar un animal en especifico
                             System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
-                            if (decision == 1){
+                            if(decision == 1){
                                 zoo.showAnimals();
                             }
                             else{
@@ -253,7 +254,7 @@ public class Menu {
 
                             Maintenance maintenance = new Maintenance(zoo.getMaintenance(), zoo.getAnimals());
                             maintenance.addMainteance();
-                            if (maintenance.getBand() == true) {
+                            if(maintenance.getBand() == true) {
                                 maintenance.setId(zoo.getMaintenanceId());
                                 zoo.setMaintenanceEmployee(maintenance.getMaintenanceDeleted());
                                 zoo.setBusyMaintenance(maintenance.getMaintenanceDeleted());
@@ -264,14 +265,12 @@ public class Menu {
                             break;
 
                         case 11: 
-
-                            System.out.print("Ingrese el ID del mantenimiento que desea finalizar: ");
+                            System.out.print("\nIngrese el ID del mantenimiento que desea finalizar: ");
                             id = intRead.nextInt();
                             zoo.endMaintenance(id);;
                             break;
 
                         case 12: 
-
                             System.out.println("\n1. Mostrar información de todos los mantenimientos"); //mostrar todos los mantenimientos
                             System.out.println("2. Consultar algún mantenimiento"); // mostrar un mantenimiento en especifico
                             System.out.print("\nIngrese opción: ");
@@ -287,8 +286,8 @@ public class Menu {
                             break;
 
                         case 13:
-                            System.out.println("\n1. Eliminar animal");
-                            System.out.println("2. Modificar animal");
+                            System.out.println("\n1. Eliminar Animal");
+                            System.out.println("2. Modificar Animal");
                             System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             switch(decision) {
@@ -299,13 +298,149 @@ public class Menu {
                                     zoo.deleteAnimal(deleteAnimalId);
                                     break;
 
-                                case 2:
+                                    case 2:
+                                    System.out.println("\n1. Modificar todo");
+                                    System.out.println("2. Modificar un campo en especifico");
+                                    System.out.print("\nIngrese opción: ");
+                                    decision = intRead.nextInt();
+                                    switch(decision) {
+
+                                        case 1:
+                                            System.out.println("\n---- Modificar animal ----\n");
+                                            System.out.print("Introduce el ID del animal que deseas modificar: ");
+                                            int modifyAnimalId = intRead.nextInt();
+                                            Animal animalToModify = null;
+                                            for(Animal animalTemp : zoo.getAnimals()) {
+                                                if(animalTemp.getAnimalId() == modifyAnimalId) {
+                                                    animalToModify = animalTemp;
+                                                    break;
+                                                }
+                                            }
+                                            if (animalToModify != null) {
+                                                System.out.print("Nuevo tipo de Animal: ");
+                                                String newType = string.nextLine();
+                                                animalToModify.setTypeAnimal(newType);
+                                                System.out.print("Nueva fecha de nacimiento (DD-MM-YYYY): ");
+                                                String newBirthdate = string.nextLine();
+                                                animalToModify.setBirthdate(newBirthdate);
+                                                System.out.print("Nueva fecha de ingreso (DD-MM-YYYY): ");
+                                                String newArrivalDate = string.nextLine();
+                                                animalToModify.setArrivalDate(newArrivalDate);
+                                                System.out.print("Nuevo peso: ");
+                                                double newWeight = doubleRead.nextDouble();
+                                                animalToModify.setWeight(newWeight);
+                                                System.out.print("Nueva frecuencia de alimentación: ");
+                                                String newFeedingFrequency = string.nextLine();
+                                                animalToModify.setFeedingFrequency(newFeedingFrequency);
+                                                System.out.print("Nuevo tipo de alimentación: ");
+                                                String newFeedingType = string.nextLine();
+                                                animalToModify.setFeedingType(newFeedingType);
+                                                System.out.print("¿Cuenta con vacunas? (true/false): ");
+                                                boolean newHasVaccines = booleanRead.nextBoolean();
+                                                animalToModify.setHasVaccines(newHasVaccines);
+                                                System.out.print("Nuevas enfermedades (separadas por coma): ");
+                                                String diseasesInput = string.nextLine();
+                                                String[] diseasesArray = diseasesInput.split(",");
+                                                ArrayList<String> newDiseases = new ArrayList<>(Arrays.asList(diseasesArray));
+                                                animalToModify.setDiseases(newDiseases);
+                                            } 
+                                            else {
+                                                System.out.println("\nAnimal no encontrado.");
+                                            }
+                                            break;
+
+                                        case 2:
+                                        System.out.println("\n---- Modificar animal ----\n");
+                                            System.out.print("Introduce el ID del animal que deseas modificar: ");
+                                            int modifyAnimalIdInput = intRead.nextInt(); // Cambiamos el nombre de la                                                    // variable modifyAnimalId
+                                            Animal foundAnimalToModify = null; // Cambiamos el nombre de la variable         // animalToModify
+                                            for(Animal animalTemp : zoo.getAnimals()) {
+                                                if(animalTemp.getAnimalId() == modifyAnimalIdInput) {
+                                                    foundAnimalToModify = animalTemp;
+                                                    break;
+                                                }
+                                            }
+                                            if(foundAnimalToModify != null) {
+                                                System.out.println("\nSeleccione el campo que desea modificar:");
+                                                System.out.println("\n1. Tipo de Animal");
+                                                System.out.println("2. Fecha de nacimiento");
+                                                System.out.println("3. Fecha de ingreso");
+                                                System.out.println("4. Peso");
+                                                System.out.println("5. Frecuencia de alimentación");
+                                                System.out.println("6. Tipo de alimentación");
+                                                System.out.println("7. ¿Cuenta con vacunas?");
+                                                System.out.println("8. Enfermedades");
+                                                decision = intRead.nextInt();
+                                                switch(decision) {
+
+                                                    case 1:
+                                                        System.out.print("\nNuevo tipo de Animal: ");
+                                                        String newType = string.nextLine();
+                                                        foundAnimalToModify.setTypeAnimal(newType);
+                                                        break;
+
+                                                    case 2:
+                                                        System.out.print("\nNueva fecha de nacimiento (DD-MM-YYYY): ");
+                                                        String newBirthdate = string.nextLine();
+                                                        foundAnimalToModify.setBirthdate(newBirthdate);
+                                                        break;
+
+                                                    case 3:
+                                                        System.out.print("\nNueva fecha de ingreso (DD-MM-YYYY): ");
+                                                        String newArrivalDate = string.nextLine();
+                                                        foundAnimalToModify.setArrivalDate(newArrivalDate);
+                                                        break;
+
+                                                    case 4:
+                                                        System.out.print("\nNuevo peso: ");
+                                                        double newWeight = doubleRead.nextDouble();
+                                                        foundAnimalToModify.setWeight(newWeight);
+                                                        break;
+
+                                                    case 5:
+                                                        System.out.print("\nNueva frecuencia de alimentación: ");
+                                                        String newFeedingFrequency = string.nextLine();
+                                                        foundAnimalToModify.setFeedingFrequency(newFeedingFrequency);
+                                                        break;
+
+                                                    case 6:
+                                                        System.out.print("\nNuevo tipo de alimentación: ");
+                                                        String newFeedingType = string.nextLine();
+                                                        foundAnimalToModify.setFeedingType(newFeedingType);
+                                                        break;
+
+                                                    case 7:
+                                                        System.out.print("\n¿Cuenta con vacunas? (true/false): ");
+                                                        boolean newHasVaccines = booleanRead.nextBoolean();
+                                                        foundAnimalToModify.setHasVaccines(newHasVaccines);
+                                                        break;
+
+                                                    case 8:
+                                                        System.out.print("\nNuevas enfermedades (separadas por coma): ");
+                                                        String diseasesInput = string.nextLine();
+                                                        String[] diseasesArray = diseasesInput.split(",");
+                                                        ArrayList<String> newDiseases = new ArrayList<>(Arrays.asList(diseasesArray));
+                                                        foundAnimalToModify.setDiseases(newDiseases);
+                                                        break;
+
+                                                    default:
+                                                        System.out.println("\nOpción inválida.");
+                                                        break;
+                                                }
+                                            } 
+                                            else {
+                                                System.out.println("\nAnimal no encontrado.");
+                                            }
+                                        }
+                                        break;
+
+                                default:
                                     break;
                             }
                             break;
 
                         case 14:
-                            System.out.println("1. Eliminar Empleado");
+                            System.out.println("\n1. Eliminar Empleado");
                             System.out.println("2. Modificar Empleado");
                             System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
@@ -315,28 +450,297 @@ public class Menu {
                                     System.out.print("\nIntroduce el ID del Empleado que deseas eliminar: ");
                                     int deleteEmployee = intRead.nextInt();
                                     zoo.deleteEmployee(deleteEmployee);
-        
                                     break;
 
                                 case 2:
-        
+                                    System.out.println("\n1. Modificar todos los datos");
+                                    System.out.println("2. Modificar un dato en especifico");
+                                    System.out.print("\nIngrese opción: ");
+                                    decision = intRead.nextInt();
+                                    switch(decision) {
+
+                                        case 1:
+                                            System.out.println("\n---- Modificar empleado ----\n");
+                                            System.out.print("Introduce el ID del empleado que deseas modificar: ");
+                                            int modifyEmployeeId = intRead.nextInt();
+                                            Employee employeeToModify = null;
+                                            for(Employee emp : zoo.getEmployees()) { // Cambiamos el nombre de la  // variable employee
+                                                if(emp.getId() == modifyEmployeeId) { // Usamos el nuevo nombre de la     // variable
+                                                    employeeToModify = emp;
+                                                    break;
+                                                }
+                                            }
+                                            if(employeeToModify != null) {
+                                                System.out.print("\nNuevo nombre: ");
+                                                String newName = string.nextLine();
+                                                System.out.print("Nuevo apellido: ");
+                                                String newLastName = string.nextLine();
+                                                System.out.print("Nueva fecha de nacimiento (DD-MM-YYYY): ");
+                                                String newBirthdate = string.nextLine();
+                                                System.out.print("Nueva fecha de ingreso (DD-MM-YYYY): ");
+                                                String newAdmissionDate = string.nextLine();
+                                                System.out.print("Nuevo RFC: ");
+                                                String newRfc = string.nextLine();
+                                                System.out.print("Nueva CURP: ");
+                                                String newCurp = string.nextLine();
+                                                System.out.print("Nuevo salario: ");
+                                                double newSalary = doubleRead.nextDouble();
+                                                System.out.print("Nuevo rol: ");
+                                                String newRol = string.nextLine();
+                                                System.out.println("\nIngrese los nuevos horarios de trabajo (Dejar vacío si no trabaja ese día): ");
+                                                String[][] newSchedule = new String[2][7];
+                                                String[] days = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
+                                                for(int i = 0; i < 7; i++) {
+                                                    System.out.println("\n---- " + days[i] + " ----\n");
+                                                    System.out.print("Nuevas horas de trabajo (00:00-24:00): ");
+                                                    newSchedule[0][i] = days[i];
+                                                    newSchedule[1][i] = string.nextLine();
+                                                }
+
+                                                // Actualizar los datos del empleado
+                                                employeeToModify.setName(newName);
+                                                employeeToModify.setLastName(newLastName);
+                                                employeeToModify.setBirthdate(newBirthdate);
+                                                employeeToModify.setAdmissionDate(newAdmissionDate);
+                                                employeeToModify.setRfc(newRfc.toUpperCase());
+                                                employeeToModify.setCurp(newCurp.toUpperCase());
+                                                employeeToModify.setSalary(newSalary);
+                                                employeeToModify.setRol(newRol);
+                                                employeeToModify.setSchedule(newSchedule);
+                                                System.out.println("\nEmpleado modificado exitosamente.");
+                                            } 
+                                            else {
+                                                System.out.println("\nEmpleado no encontrado.");
+                                            }
+                                            break;
+
+                                        case 2: // Modificar empleado
+                                            System.out.println("\n---- Modificar empleado ----\n");
+                                            System.out.print("Introduce el ID del empleado que deseas modificar: ");
+                                            int modifyEmployeeIdInput = intRead.nextInt();
+                                            intRead.nextLine(); // Consumir la nueva línea después de leer el entero          
+                                            Employee femployeeToModify = null; // Buscar empleado por ID
+                                            for(Employee emp : zoo.getEmployees()) {
+                                                if(emp.getId() == modifyEmployeeIdInput) {
+                                                    femployeeToModify = emp;
+                                                    break;
+                                                }
+                                            }
+                                            if(femployeeToModify != null) {  // Recopilar información actualizada del empleado
+                                                // Recopilar información actualizada del empleado
+                                                System.out.println("\nSeleccione el campo que desea modificar:");
+                                                System.out.println("\n1. Nombre");
+                                                System.out.println("2. Apellidos");
+                                                System.out.println("3. Fecha de nacimiento");
+                                                System.out.println("4. Fecha de ingreso");
+                                                System.out.println("5. RFC");
+                                                System.out.println("6. CURP");
+                                                System.out.println("7. Salario");
+                                                System.out.println("8. Rol");
+                                                System.out.println("9. Horario de trabajo");
+                                                System.out.print("\nIngrese opción: ");
+                                                decision = intRead.nextInt();
+                                                switch(decision) {
+
+                                                    case 1:
+                                                        System.out.print("\nNuevo nombre: ");
+                                                        String newName = string.nextLine();
+                                                        femployeeToModify.setName(newName);
+                                                        break;
+
+                                                    case 2:
+                                                        System.out.print("\nNuevos apellidos: ");
+                                                        String newLastName = string.nextLine();
+                                                        femployeeToModify.setLastName(newLastName);
+                                                        break;
+
+                                                    case 3:
+                                                        System.out.print("\nNueva fecha de nacimiento (DD-MM-YYYY): ");
+                                                        String newBirthdate = string.nextLine();
+                                                        femployeeToModify.setBirthdate(newBirthdate);
+                                                        break;
+
+                                                    case 4:
+                                                        System.out.print("\nNueva fecha de ingreso (DD-MM-YYYY): ");
+                                                        String newAdmissionDate = string.nextLine();
+                                                        femployeeToModify.setAdmissionDate(newAdmissionDate);
+                                                        break;
+
+                                                    case 5:
+                                                        System.out.print("\nNuevo RFC: ");
+                                                        String newRfc = string.nextLine();
+                                                        femployeeToModify.setRfc(newRfc.toUpperCase());
+                                                        break;
+
+                                                    case 6:
+                                                        System.out.print("\nNueva CURP: ");
+                                                        String newCurp = string.nextLine();
+                                                        femployeeToModify.setCurp(newCurp.toUpperCase());
+                                                        break;
+
+                                                    case 7:
+                                                        System.out.print("\nNuevo salario: ");
+                                                        double newSalary = doubleRead.nextDouble();
+                                                        femployeeToModify.setSalary(newSalary);
+                                                        break;
+
+                                                    case 8:
+                                                        System.out.print("\nNuevo rol: ");
+                                                        String newRol = string.nextLine();
+                                                        femployeeToModify.setRol(newRol);
+                                                        break;
+
+                                                    case 9:
+                                                        System.out.println("\nIngrese los nuevos horarios de trabajo (Dejar vacío si no trabaja ese día): ");
+                                                        String[][] newSchedule = new String[2][7];
+                                                        String[] days = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
+                                                        for (int i = 0; i < 7; i++) {
+                                                            System.out.println("\n---- " + days[i] + " ----\n");
+                                                            System.out.print("Nuevas horas de trabajo (00:00-24:00): ");
+                                                            newSchedule[0][i] = days[i];
+                                                            newSchedule[1][i] = string.nextLine();
+                                                        }
+                                                        femployeeToModify.setSchedule(newSchedule);
+                                                        break;
+
+                                                    default:
+                                                        System.out.println("\nOpción inválida.");
+                                                        break;
+                                                }
+                                                System.out.println("\nEmpleado modificado exitosamente.");
+                                            } 
+                                            else {
+                                                System.out.println("\nEmpleado no encontrado.");
+                                            }
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
                                     break;
                             }
                             break;
 
                         case 15:
-                            System.out.println("1. Eliminar Visitante");
+                            System.out.println("\n1. Eliminar Visitante");
                             System.out.println("2. Modificar Visitante");
                             System.out.print("\nIngrese opción: ");
                             decision = intRead.nextInt();
                             switch(decision) {
                                 
                                 case 1:
-                                    System.out.print("\nIntroduce el ID del Visitante que deseas eliminar: ");
+                                    System.out.print("\nIntroduce el ID del visitante que deseas eliminar: ");
                                     int deleteVisitor = intRead.nextInt();
                                     zoo.deleteVisitor(deleteVisitor);
+
                                 case 2:
-                                    break;
+                                    System.out.println("\n1. Modificar todos los datos");
+                                    System.out.println("2. Modificar un dato en especifico");
+                                    System.out.print("\nIngrese opción: ");
+                                    decision = intRead.nextInt();
+                                    switch(decision) {
+
+                                        case 1:
+                                            System.out.println("\n---- Modificar visitante ----\n");
+                                            System.out.print("Introduce el ID del empleado que deseas modificar: ");
+                                            int modifyVisitorId = intRead.nextInt();
+                                            Visitor VisitorModify = null;
+                                            for(Visitor emp : zoo.getVisitors()) { // Cambiamos el nombre de la // variable employee
+                                                if (emp.getId() == modifyVisitorId) { // Usamos el nuevo nombre de la// variable
+                                                    VisitorModify = emp;
+                                                    break;
+                                                }
+                                            }
+                                            if(VisitorModify != null) {
+                                                System.out.print("Nuevo nombre: ");
+                                                String newName = string.nextLine();
+                                                System.out.print("Nuevo apellido: ");
+                                                String newLastName = string.nextLine();
+                                                System.out.print("Nueva fecha de nacimiento (DD-MM-YYYY): ");
+                                                String newBirthdate = string.nextLine();
+                                                System.out.print("Nueva fecha de ingreso (DD-MM-YYYY): ");
+                                                String newAdmissionDate = string.nextLine();
+                                                System.out.print("Nueva CURP: ");
+                                                String newCurp = string.nextLine();  // Actualizar los datos del empleado
+                                                VisitorModify.setName(newName);
+                                                VisitorModify.setLastName(newLastName);
+                                                VisitorModify.setBirthdate(newBirthdate);
+                                                VisitorModify.setAdmissionDate(newAdmissionDate);
+                                                VisitorModify.setCurp(newCurp.toUpperCase());
+                                                System.out.println("\nVisitante modificado exitosamente.");
+                                            } 
+                                            else {
+                                                System.out.println("\nVisitante no encontrado.");
+                                            }
+                                            break;
+
+                                        case 2:
+                                            System.out.println("\n---- Modificar visitante ----\n");
+                                            System.out.print("Introduce el ID del visitante que deseas modificar: ");
+                                            int modifyVisitorIdInput = intRead.nextInt();
+                                            intRead.nextLine(); // Consumir la nueva línea después de leer el entero
+                                            Visitor visitorToModify = null;     // Buscar visitante por ID
+                                            for(Visitor fvisitor : zoo.getVisitors()) {
+                                                if(fvisitor.getId() == modifyVisitorIdInput) {
+                                                    visitorToModify = fvisitor;
+                                                    break;
+                                                }
+                                            }
+                                            if(visitorToModify != null) {   // Recopilar información actualizada del empleado
+                                                System.out.println("\nSeleccione el campo que desea modificar:");
+                                                System.out.println("\n1. Nombre");
+                                                System.out.println("2. Apellidos");
+                                                System.out.println("3. Fecha de nacimiento");
+                                                System.out.println("4. Fecha de Ingreso");
+                                                System.out.println("5. CURP");
+                                                System.out.print("\nIngrese opción: ");
+                                                decision = intRead.nextInt();
+                                                switch(decision) {
+
+                                                    case 1:
+                                                        System.out.print("\nNuevo nombre: ");
+                                                        String newName = string.nextLine();
+                                                        visitorToModify.setName(newName);
+                                                        break;
+
+                                                    case 2:
+                                                        System.out.print("\nNuevos apellidos: ");
+                                                        String newLastName = string.nextLine();
+                                                        visitorToModify.setLastName(newLastName);
+                                                        break;
+
+                                                    case 3:
+                                                        System.out.print("\nNueva fecha de nacimiento (DD-MM-YYYY): ");
+                                                        String newBirthdate = string.nextLine();
+                                                        visitorToModify.setBirthdate(newBirthdate);
+                                                        break;
+
+                                                    case 4:
+                                                        System.out.print("\nNueva fecha de ingreso (DD-MM-YYYY): ");
+                                                        String newAdmissionDate = string.nextLine();
+                                                        visitorToModify.setAdmissionDate(newAdmissionDate);
+                                                        break;
+
+                                                    case 5:
+                                                        System.out.print("\nNueva CURP: ");
+                                                        String newCurp = string.nextLine();
+                                                        visitorToModify.setCurp(newCurp.toUpperCase());
+                                                        break;
+
+                                                    default:
+                                                        System.out.println("\nOpción inválida.");
+                                                        break;
+                                                }
+                                                System.out.println("\nVisitante modificado exitosamente.");
+                                            } 
+                                            else {
+                                                System.out.println("\nVisitante no encontrado.");
+                                            }
+                                            break;
+                                            
+                                        default:
+                                            break;
+                                    }
                             }
                             break;
 

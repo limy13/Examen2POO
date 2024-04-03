@@ -49,6 +49,42 @@ class Employee {
         this.id = id;
     }
 
+    void setName(String name) {
+        this.name = name;
+    }
+
+    void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    void setAdmissionDate(String admissionDate) {
+        this.admissionDate = admissionDate;
+    }
+
+    void setRfc(String rfc) {
+        this.rfc = rfc;
+    }
+
+    void setCurp(String curp) {
+        this.curp = curp;
+    }
+
+    void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    void setSchedule(String[][] schedule) {
+        this.schedule = schedule;
+    }
+
+    void setRol(String rol) {
+        this.rol = rol;
+    }
+
     String employeeGetData() { //datos de empleado 
         return String.format("Nombre: %s %s \nID: %d \nFecha de nacimiento: %s \nFecha de ingreso: %s \nRFC: %s \nCURP: %s \nSalario: %.2f MX \nRol: %s",
             this.name, this.lastName, this.id, this.birthdate, this.admissionDate, this.rfc, this.curp, this.salary, this.rol);

@@ -53,6 +53,25 @@ class Visitor {
         this.id = id;
     }
 
+    void setName(String name) {
+        this.name = name;
+    }
+
+    void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    void setAdmissionDate(String admissionDate) {
+        this.admissionDate = admissionDate;
+    }
+    void setCurp(String curp){
+        this.curp = curp;
+    }
+
     //CAMBIOS EN EL GET DATA
     String visitorGetData() { //datos de visitante
         return String.format("\nNombre: %s %s \nID: %d \nFecha de nacimiento: %s \nCURP: %s \nNúmero de visitas: %d \nFecha de ingreso: %s", 

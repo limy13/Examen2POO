@@ -84,6 +84,10 @@ class Zoo {
         return guides;
     }
 
+    ArrayList<Employee> getEmployees(){ //obtiene la lista de guias
+        return employees;
+    }
+
     ArrayList<Visitor> getVisitors(){ 
         return visitors;
     } 

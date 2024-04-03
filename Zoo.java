@@ -354,7 +354,6 @@ class Zoo {
             System.out.println("\nNo se encontró ningún empleado con el ID: " + employeeId);
         }
     }
-    
 
     void deleteVisitor(int id) {
         int removeVisitor = -1;

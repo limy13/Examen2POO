@@ -317,7 +317,7 @@ public class Menu {
                                                 }
                                             }
                                             if (animalToModify != null) {
-                                                System.out.print("Nuevo tipo de Animal: ");
+                                                System.out.print("\nNuevo tipo de Animal: ");
                                                 String newType = string.nextLine();
                                                 animalToModify.setTypeAnimal(newType);
                                                 System.out.print("Nueva fecha de nacimiento (DD-MM-YYYY): ");
@@ -343,6 +343,7 @@ public class Menu {
                                                 String[] diseasesArray = diseasesInput.split(",");
                                                 ArrayList<String> newDiseases = new ArrayList<>(Arrays.asList(diseasesArray));
                                                 animalToModify.setDiseases(newDiseases);
+                                                System.out.println("\nAnimal modificado exitosamente.");
                                             } 
                                             else {
                                                 System.out.println("\nAnimal no encontrado.");
@@ -370,6 +371,7 @@ public class Menu {
                                                 System.out.println("6. Tipo de alimentación");
                                                 System.out.println("7. ¿Cuenta con vacunas?");
                                                 System.out.println("8. Enfermedades");
+                                                System.out.print("\nIngrese opción: ");
                                                 decision = intRead.nextInt();
                                                 switch(decision) {
 
@@ -427,6 +429,7 @@ public class Menu {
                                                         System.out.println("\nOpción inválida.");
                                                         break;
                                                 }
+                                                System.out.println("\nAnimal modificado exitosamente.");
                                             } 
                                             else {
                                                 System.out.println("\nAnimal no encontrado.");
@@ -527,7 +530,6 @@ public class Menu {
                                                 }
                                             }
                                             if(femployeeToModify != null) {  // Recopilar información actualizada del empleado
-                                                // Recopilar información actualizada del empleado
                                                 System.out.println("\nSeleccione el campo que desea modificar:");
                                                 System.out.println("\n1. Nombre");
                                                 System.out.println("2. Apellidos");
@@ -587,8 +589,19 @@ public class Menu {
                                                     case 8:
                                                         System.out.print("\nNuevo rol: ");
                                                         String newRol = string.nextLine();
+                                                        String oldRol = femployeeToModify.getRol(); // Guarda el rol actual del empleado
                                                         femployeeToModify.setRol(newRol);
+                                                        // Verificar si el empleado cambió de rol de Mantenimiento a
+                                                        // Guía o viceversa
+                                                        if (oldRol.equalsIgnoreCase("Mantenimiento") && (newRol.equalsIgnoreCase("Guia") || newRol.equalsIgnoreCase("Guia"))) {
+                                                            zoo.getMaintenance().remove(femployeeToModify); // Elimina al empleado de la lista de mantenimiento
+                                                            zoo.getGuides().add(femployeeToModify); //  empleado a la lista de guías
+                                                        } else if (oldRol.equalsIgnoreCase("Guia") && (newRol.equalsIgnoreCase("Mantenimiento"))) {
+                                                            zoo.getGuides().remove(femployeeToModify); // Elimina al empleado de la lista de guías
+                                                            zoo.getMaintenance().add(femployeeToModify); // Agrega al empleado a la lista de mantenimiento
+                                                        }
                                                         break;
+                                                        
 
                                                     case 9:
                                                         System.out.println("\nIngrese los nuevos horarios de trabajo (Dejar vacío si no trabaja ese día): ");
@@ -632,6 +645,7 @@ public class Menu {
                                     System.out.print("\nIntroduce el ID del visitante que deseas eliminar: ");
                                     int deleteVisitor = intRead.nextInt();
                                     zoo.deleteVisitor(deleteVisitor);
+                                    break;
 
                                 case 2:
                                     System.out.println("\n1. Modificar todos los datos");
@@ -642,7 +656,7 @@ public class Menu {
 
                                         case 1:
                                             System.out.println("\n---- Modificar visitante ----\n");
-                                            System.out.print("Introduce el ID del empleado que deseas modificar: ");
+                                            System.out.print("Introduce el ID del visitante que deseas modificar: ");
                                             int modifyVisitorId = intRead.nextInt();
                                             Visitor VisitorModify = null;
                                             for(Visitor emp : zoo.getVisitors()) { // Cambiamos el nombre de la // variable employee
@@ -652,7 +666,7 @@ public class Menu {
                                                 }
                                             }
                                             if(VisitorModify != null) {
-                                                System.out.print("Nuevo nombre: ");
+                                                System.out.print("\nNuevo nombre: ");
                                                 String newName = string.nextLine();
                                                 System.out.print("Nuevo apellido: ");
                                                 String newLastName = string.nextLine();

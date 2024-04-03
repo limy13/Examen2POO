@@ -49,6 +49,10 @@ class Visitor {
         return Integer.parseInt(date);
     }
 
+    void setId(int id) {
+        this.id = id;
+    }
+
     //CAMBIOS EN EL GET DATA
     String visitorGetData() { //datos de visitante
         return String.format("\nNombre: %s %s \nID: %d \nFecha de nacimiento: %s \nCURP: %s \nNúmero de visitas: %d \nFecha de ingreso: %s", 

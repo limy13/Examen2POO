@@ -32,7 +32,7 @@ public class Menu {
                     System.out.println("12. Mostrar información de mantenimientos realizados");
                     System.out.println("13. Eliminar o modificar datos de un Animal");
                     System.out.println("14. Eliminar o modificar datos de un Empleado");
-                    System.out.println("14. Eliminar o modificar datos de un Visitante");
+                    System.out.println("15. Eliminar o modificar datos de un Visitante");
                     System.out.println("16. Salir");
                     System.out.print("\nIngrese opción: ");
                     option = intRead.nextInt();
@@ -301,10 +301,6 @@ public class Menu {
 
                                 case 2:
                                     break;
-        
-                                default:
-                                    System.out.println("\nSelecciona un ID que exista, por favor.");
-                                    break;
                             }
                             break;
 
@@ -325,10 +321,6 @@ public class Menu {
                                 case 2:
         
                                     break;
-        
-                                default:
-                                    System.out.println("\nSelecciona un ID que exista, por favor.");
-                                    break;
                             }
                             break;
 
@@ -344,10 +336,6 @@ public class Menu {
                                     int deleteVisitor = intRead.nextInt();
                                     zoo.deleteVisitor(deleteVisitor);
                                 case 2:
-                                    break;
-        
-                                default:
-                                    System.out.println("\nSelecciona un ID que exista, por favor.");
                                     break;
                             }
                             break;

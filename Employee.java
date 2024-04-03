@@ -45,6 +45,10 @@ class Employee {
         }
     }
 
+    void setId(int id) {
+        this.id = id;
+    }
+
     String employeeGetData() { //datos de empleado 
         return String.format("Nombre: %s %s \nID: %d \nFecha de nacimiento: %s \nFecha de ingreso: %s \nRFC: %s \nCURP: %s \nSalario: %.2f MX \nRol: %s",
             this.name, this.lastName, this.id, this.birthdate, this.admissionDate, this.rfc, this.curp, this.salary, this.rol);

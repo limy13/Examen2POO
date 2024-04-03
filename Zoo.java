@@ -13,7 +13,7 @@ class Zoo {
     private ArrayList<Employee> busyMaintenance = new ArrayList<Employee>(); // ArrayList para almacenar empleados de mantenimiento //HUBO CAMBIOS AQUI 
     private ArrayList<Maintenance> maintenance = new ArrayList<Maintenance>(); // ArrayList para almacenar mantenimiento //HUBO CAMBIOS AQUI 
     private ArrayList<Visit> visit = new ArrayList<Visit>(); // ArrayList para almacenar visitas
-    private int employeeId = 0, animalId = 0, vistorId = 0, visitId = 0, maintenanceId = 0;
+    private int employeeId = 0, animalId = 0, visitorId = 0, visitId = 0, maintenanceId = 0;
     private Employee guideDeleted, maintenanceDeleted ; 
 
 
@@ -58,8 +58,8 @@ class Zoo {
     }
 
     int getVisitorId(){
-        vistorId++;
-        return vistorId;
+        visitorId++;
+        return visitorId;
     }
 
     int getVisitId(){
@@ -115,7 +115,7 @@ class Zoo {
         else{
             int x = 1; 
             for (Employee i : employees){
-                System.out.println("\n---- Empleado " + x + " ----\n");
+                System.out.println("\n\n---- Empleado " + x + " ----\n");
                 System.out.println(i.employeeGetData());
                 i.printSchedule();
                 x++;
@@ -307,38 +307,70 @@ class Zoo {
             }
         }    
     }
-
+    //CORREGIR LOS IDS
      // METODOS PARA ELIMINAR ANIMALES
      void deleteAnimal(int animalId) {
-        for (Animal animal : animals) {
-            if (animal.getAnimalId() == animalId) {
-                animals.remove(animal);
-                System.out.println("\nEl animal con ID: " + animalId + " ha sido eliminado.");
-                return;
+        int removeAnimal = -1;
+        for(int i = 0; i < animals.size(); i++) { // Buscar el animal por su ID
+            if(animals.get(i).getAnimalId() == animalId) {
+                removeAnimal = i;
+                break;
             }
         }
-        System.out.println("\nEl animal con ID: " + animalId + " no se encuentra");
+        if(removeAnimal != -1) {  // Si se encontró el animal
+            animals.remove(removeAnimal);
+            System.out.println("\nEl animal con ID: " + animalId + " ha sido eliminado.");
+            for(int i = removeAnimal; i < animals.size(); i++) {  // Reorganizar los IDs de los animales restantes
+                animals.get(i).setAnimalId(animals.get(i).getAnimalId() - 1);
+            }
+            this.animalId = animals.size();
+        } 
+        else {
+            System.out.println("\nNo se encontró ningún animal con el ID: " + animalId);
+        }
     }
 
-    void deleteEmployee(int employeeId) {
-        for (Employee employee : employees) {
-            if (employee.getId() == employeeId) {
-                employees.remove(employee);
-                System.out.println("\nEl empleado con ID: " + employeeId + " ha sido eliminado.");
-                return;
+    void deleteEmployee(int employeeId) {      
+        int Remove = -1; // Variable para almacenar el índice del empleado que se eliminará
+        for(int i = 0; i < employees.size(); i++) { // Buscar el empleado por su ID
+            if(employees.get(i).getId() == employeeId) {
+                Remove = i;
+                break;
             }
+        }   
+        if(Remove != -1) {     // Si se encontró el empleado
+            employees.remove(Remove);  // Eliminar al empleado
+            System.out.println("\nEl empleado con ID: " + employeeId + " ha sido eliminado.");
+            for(int i = Remove; i < employees.size(); i++) {  // Ajustar los IDs de los empleados restantes
+                employees.get(i).setId(i + 1);
+            }
+            this.employeeId = employees.size();
         }
-        System.out.println("\nEl empleado con ID: " + employeeId + " no se encuentra");
+        else {
+            System.out.println("\nNo se encontró ningún empleado con el ID: " + employeeId);
+        }
     }
+    
 
-    void deleteVisitor(int visitorId) {
-        for (Visitor visitor : visitors) {
-            if (visitor.getId() == visitorId) {
-                visitors.remove(visitor);
-                System.out.println("\nEl Visitante con ID: " + visitorId + " ha sido eliminado.");
-                return;
+    void deleteVisitor(int id) {
+        int removeVisitor = -1;
+        for(int i = 0; i < visitors.size(); i++) { // Buscar el visitante por su ID
+            if(visitors.get(i).getId() == id) {
+                removeVisitor = i;
+                break;
             }
         }
-        System.out.println("\nEl Visitante con ID: " + visitorId + " no se encuentra");
+        if(removeVisitor != -1) {  // Si se encontró el visitante   
+            visitors.remove(removeVisitor); // Eliminar el visitante
+            System.out.println("\nEl visitante con ID: " + id + " ha sido eliminado.");
+            int i = removeVisitor;
+            for(; i < visitors.size(); i++) {  // Reorganizar los IDs de los visitantes restantes
+                visitors.get(i).setId(visitors.get(i).getId() - 1);
+            }
+            this.visitorId = visitors.size();
+        } 
+        else {
+            System.out.println("\nNo se encontró ningún visitante con el ID: " + id);
+        }
     }
 }

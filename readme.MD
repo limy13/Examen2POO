@@ -1,13 +1,9 @@
 # Examen 2 POO
 
 Integrantes:
-
 - Aguilar Garnica Alfredo
 - García Tinajero Lizeth
 - López Martínez Eduardo
-
-
-
 
 El Zoológico de Morelia necesita un sistema de gestión para administrar sus operaciones, incluyendo la gestión del personal, visitantes y animales. El sistema debe tener las siguientes funcionalidades y características:
 

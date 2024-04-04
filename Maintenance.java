@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Scanner;;
+import java.util.Scanner;
 
 class Maintenance {
     
@@ -10,7 +10,7 @@ class Maintenance {
     private ArrayList<Employee> maintenance = new ArrayList<>();
     private ArrayList<Animal> animals = new ArrayList<>();
     private Employee maintenanceDeleted;
-    private String [][] guideSchedule;
+    private String [][] maintenanceSchedule;
     private boolean band2 = false, progress = false;
 
     public Maintenance(ArrayList<Employee> maintenance, ArrayList<Animal> animals) {
@@ -74,12 +74,12 @@ class Maintenance {
         boolean band = false;
         if(maintenance.isEmpty() == false) {
             for(Employee i : maintenance) {
-                guideSchedule = i.getSchedule();
+                maintenanceSchedule = i.getSchedule();
                 for(int x = 0; x < 7; x++) {
-                    if(day.equalsIgnoreCase(guideSchedule[0][x])) {
+                    if(day.equalsIgnoreCase(maintenanceSchedule[0][x])) {
                         boolean band1 = true;
-                        if (guideSchedule[1][x].isEmpty() == false) {
-                            if( getMaintenanceHour() >= getHours(guideSchedule[1][x], band1) && getMaintenanceHour() <= getHours(guideSchedule[1][x], band1 = false)) { 
+                        if (maintenanceSchedule[1][x].isEmpty() == false) {
+                            if( getMaintenanceHour() >= getHours(maintenanceSchedule[1][x], band1) && getMaintenanceHour() <= getHours(maintenanceSchedule[1][x], band1 = false)) { 
                                 employeeId = i.getId();
                                 employee = String.format("%s %s \nID del empleado encargado: %d",  i.getName(), i.getLastName(), employeeId);   
                                 maintenanceDeleted = i;

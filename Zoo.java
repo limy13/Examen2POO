@@ -287,7 +287,7 @@ class Zoo {
         else {
             for(Visit i : visit) {
                 if(id == i.getVisitId()) {
-                    i.setProgress(true); //CAMBIOS AQUIU
+                    i.setProgress(true); //CAMBIOS AQUIU 
                     band2 = true;
                     for (Employee x : busyGuides) {
                         if(i.getGuideId() == x.getId()) {

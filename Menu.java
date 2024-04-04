@@ -451,8 +451,8 @@ public class Menu {
 
                                 case 1:
                                     System.out.print("\nIntroduce el ID del Empleado que deseas eliminar: ");
-                                    int deleteEmployee = intRead.nextInt();
-                                    zoo.deleteEmployee(deleteEmployee);
+                                    id = intRead.nextInt();
+                                    zoo.deleteEmployee(id);            
                                     break;
 
                                 case 2:
@@ -490,6 +490,7 @@ public class Menu {
                                                 double newSalary = doubleRead.nextDouble();
                                                 System.out.print("Nuevo rol: ");
                                                 String newRol = string.nextLine();
+                                                String oldRol = employeeToModify.getRol();
                                                 System.out.println("\nIngrese los nuevos horarios de trabajo (Dejar vacío si no trabaja ese día): ");
                                                 String[][] newSchedule = new String[2][7];
                                                 String[] days = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
@@ -509,6 +510,30 @@ public class Menu {
                                                 employeeToModify.setCurp(newCurp.toUpperCase());
                                                 employeeToModify.setSalary(newSalary);
                                                 employeeToModify.setRol(newRol);
+                                                if(oldRol.equalsIgnoreCase("Mantenimiento") && (newRol.equalsIgnoreCase("Guia") || newRol.equalsIgnoreCase("Guía"))) {
+                                                    zoo.setMaintenanceEmployee(employeeToModify); // Elimina al empleado de la lista de mantenimiento
+                                                    for(Employee x: zoo.getBusyMaintenance()) { //ve si el empleado este en mantenimientos ocupados y si lo elimna
+                                                        if(employeeToModify.getId() == x.getId()) {
+                                                            zoo.deleteBusyMaintenance(employeeToModify);
+                                                        }
+                                                    }
+                                                    zoo.addGuides(employeeToModify); //  empleado a la lista de guías
+                                                } 
+                                                else if((oldRol.equalsIgnoreCase("Guia") || oldRol.equalsIgnoreCase("Guía")) && (newRol.equalsIgnoreCase("Mantenimiento"))) {
+                                                    zoo.setGuides(employeeToModify); // Elimina al empleado de la lista de guías
+                                                    for(Employee i: zoo.getBusyGuides()) { //ve si el empleado estaen guias ocupados y si si lo elimina
+                                                        if(employeeToModify.getId() == i.getId()) {
+                                                            zoo.deleteBusyGuides(i);
+                                                        }
+                                                    }
+                                                    zoo.addMainteanceEmployee(employeeToModify);; // Agrega al empleado a la lista de mantenimiento
+                                                }
+                                                else if(newRol.equalsIgnoreCase("Guia") || newRol.equalsIgnoreCase("Guía")) { //agrega a lista de guias si el rol viejo es uno que no sea guia o man tenimiento
+                                                    zoo.addGuides(employeeToModify);
+                                                }
+                                                else if(newRol.equalsIgnoreCase("Mantenimiento")) { //agega a la lista de mantenimiento si es que el rol viejo no es mantenimiento o guia
+                                                    zoo.addMainteanceEmployee(employeeToModify);
+                                                }
                                                 employeeToModify.setSchedule(newSchedule);
                                                 System.out.println("\nEmpleado modificado exitosamente.");
                                             } 
@@ -593,16 +618,32 @@ public class Menu {
                                                         femployeeToModify.setRol(newRol);
                                                         // Verificar si el empleado cambió de rol de Mantenimiento a
                                                         // Guía o viceversa
-                                                        if (oldRol.equalsIgnoreCase("Mantenimiento") && (newRol.equalsIgnoreCase("Guia") || newRol.equalsIgnoreCase("Guia"))) {
-                                                            zoo.getMaintenance().remove(femployeeToModify); // Elimina al empleado de la lista de mantenimiento
-                                                            zoo.getGuides().add(femployeeToModify); //  empleado a la lista de guías
-                                                        } else if (oldRol.equalsIgnoreCase("Guia") && (newRol.equalsIgnoreCase("Mantenimiento"))) {
-                                                            zoo.getGuides().remove(femployeeToModify); // Elimina al empleado de la lista de guías
-                                                            zoo.getMaintenance().add(femployeeToModify); // Agrega al empleado a la lista de mantenimiento
+                                                        if(oldRol.equalsIgnoreCase("Mantenimiento") && (newRol.equalsIgnoreCase("Guia") || newRol.equalsIgnoreCase("Guía"))) {
+                                                            zoo.setMaintenanceEmployee(femployeeToModify); // Elimina al empleado de la lista de mantenimiento
+                                                            for(Employee x: zoo.getBusyMaintenance()) { //ve si el empleado estaen mantenimientos ocupados y si si lo elimina
+                                                                if(femployeeToModify.getId() == x.getId()) {
+                                                                    zoo.deleteBusyMaintenance(femployeeToModify);
+                                                                }
+                                                            }
+                                                            zoo.addGuides(femployeeToModify); //  empleado a la lista de guías
+                                                        } 
+                                                        else if((oldRol.equalsIgnoreCase("Guia") || oldRol.equalsIgnoreCase("Guía")) && (newRol.equalsIgnoreCase("Mantenimiento"))) {
+                                                            zoo.setGuides(femployeeToModify); // Elimina al empleado de la lista de guías
+                                                            for(Employee i: zoo.getBusyGuides()) { //ve si el empleado estaen guias ocupados y si si lo elimina
+                                                                if(femployeeToModify.getId() == i.getId()) {
+                                                                    zoo.deleteBusyGuides(i);
+                                                                }
+                                                            }
+                                                            zoo.addMainteanceEmployee(femployeeToModify);; // Agrega al empleado a la lista de mantenimiento
+                                                        }
+                                                        else if(newRol.equalsIgnoreCase("Guia") || newRol.equalsIgnoreCase("Guía")) {  //agega a la lista de guias si es que el rol viejo no es mantenimiento o guia
+                                                            zoo.addGuides(femployeeToModify);
+                                                        }
+                                                        else if(newRol.equalsIgnoreCase("Mantenimiento")) {  //agega a la lista de mantenimiento si es que el rol viejo no es mantenimiento o guia
+                                                            zoo.addMainteanceEmployee(femployeeToModify);
                                                         }
                                                         break;
                                                         
-
                                                     case 9:
                                                         System.out.println("\nIngrese los nuevos horarios de trabajo (Dejar vacío si no trabaja ese día): ");
                                                         String[][] newSchedule = new String[2][7];

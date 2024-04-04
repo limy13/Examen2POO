@@ -526,7 +526,7 @@ public class Menu {
                                                             zoo.deleteBusyGuides(i);
                                                         }
                                                     }
-                                                    zoo.addMainteanceEmployee(employeeToModify);; // Agrega al empleado a la lista de mantenimiento
+                                                    zoo.addMainteanceEmployee(employeeToModify); // Agrega al empleado a la lista de mantenimiento
                                                 }
                                                 else if(newRol.equalsIgnoreCase("Guia") || newRol.equalsIgnoreCase("Guía")) { //agrega a lista de guias si el rol viejo es uno que no sea guia o man tenimiento
                                                     zoo.addGuides(employeeToModify);

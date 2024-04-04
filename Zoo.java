@@ -12,7 +12,9 @@ class Zoo {
     private ArrayList<Employee> maintenanceEmployee = new ArrayList<Employee>(); // ArrayList para almacenar empleados de mantenimiento //HUBO CAMBIOS AQUI 
     private ArrayList<Employee> busyMaintenance = new ArrayList<Employee>(); // ArrayList para almacenar empleados de mantenimiento //HUBO CAMBIOS AQUI 
     private ArrayList<Maintenance> maintenance = new ArrayList<Maintenance>(); // ArrayList para almacenar mantenimiento //HUBO CAMBIOS AQUI 
+    private ArrayList<Maintenance> endMaintenances = new ArrayList<Maintenance>(); // ArrayList para almacenar manten
     private ArrayList<Visit> visit = new ArrayList<Visit>(); // ArrayList para almacenar visitas
+    private ArrayList<Visit> endVisit = new ArrayList<Visit>(); // ArrayList para almacenar visitas
     private int employeeId = 0, animalId = 0, visitorId = 0, visitId = 0, maintenanceId = 0;
     private Employee guideDeleted, maintenanceDeleted ; 
 
@@ -279,7 +281,16 @@ class Zoo {
     }
 
     void endVisit(int id) { //verificar esto
-        boolean band = false, band2 = false;
+        boolean band = false, band2 = false, band3 = false;
+        for(Visit y : endVisit) {
+            if(id == y.getVisitId()) {
+                band3 = true;
+            }
+        }
+        if(band3 == true) {
+            System.out.println("\nEsta visita ya ha sido finalizada");
+            return;
+        }
         if(visit.isEmpty()) {
             System.out.println("\nNo hay visitas registradas");
             return;
@@ -289,6 +300,7 @@ class Zoo {
                 if(id == i.getVisitId()) {
                     i.setProgress(true); //CAMBIOS AQUIU 
                     band2 = true;
+                    endVisit.add(i);
                     for (Employee x : busyGuides) {
                         if(i.getGuideId() == x.getId()) {
                             guideDeleted = x; //AQUI SE ELIMINO SETPROGRESSS
@@ -312,8 +324,17 @@ class Zoo {
     }
 
     void endMaintenance(int id) { //verificar esto
-        boolean band = false, band2 = false; //CAMBIOS AQUI
-        if(maintenance.isEmpty()) {
+        boolean band = false, band2 = false, band3 = false; //CAMBIOS AQUI
+        for(Maintenance y : endMaintenances) {
+            if(id == y.getId()) {
+                band3 = true;
+            }
+        }
+        if(band3 == true) {
+            System.out.println("\nEste mantenimiento ya ha sido finalizado");
+            return;
+        }
+        else if(maintenance.isEmpty()) {
             System.out.println("\nNo hay mantenimientos registrados");
             return;
         }
@@ -321,7 +342,8 @@ class Zoo {
             for (Maintenance i : maintenance) {
                 if (id == i.getId()) {
                     i.setProgress(true); //HUBO CAMBIOS AQUI
-                    band2 = true;                           //CAMBIOS AQUI
+                    band2 = true;           
+                    endMaintenances.add(i);                //CAMBIOS AQUI
                     for(Employee x : busyMaintenance) {
                         if(i.getEmployeeId() == x.getId()) {    //AQUI SE ELIMINO EL SETPROGRESS
                             maintenanceDeleted = x;
@@ -371,7 +393,7 @@ class Zoo {
         for(int i = 0; i < employees.size(); i++) { // Buscar el empleado por su ID
             for(Employee y : guides) { //ve si esta en la lista de guias ocupados para eliminarlo
                 if(employeeId == y.getId()) {
-                    setGuides(y);;
+                    setGuides(y);
                     break;
                 }
             }
@@ -383,7 +405,7 @@ class Zoo {
             }
             for(Employee w : maintenanceEmployee) { //ve si esta en la lista de mantenimiento ocupado para eliminarlo
                 if(employeeId == w.getId()) {
-                    setMaintenanceEmployee(w);;
+                    setMaintenanceEmployee(w);
                     break;
                 }
             }

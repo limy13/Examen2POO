@@ -369,9 +369,21 @@ class Zoo {
     void deleteEmployee(int employeeId) {      
         int Remove = -1; // Variable para almacenar el índice del empleado que se eliminará
         for(int i = 0; i < employees.size(); i++) { // Buscar el empleado por su ID
+            for(Employee y : guides) { //ve si esta en la lista de guias ocupados para eliminarlo
+                if(employeeId == y.getId()) {
+                    setGuides(y);;
+                    break;
+                }
+            }
             for(Employee x : busyGuides) { //ve si esta en la lista de guias ocupados para eliminarlo
                 if(employeeId == x.getId()) {
                     deleteBusyGuides(x);
+                    break;
+                }
+            }
+            for(Employee w : maintenanceEmployee) { //ve si esta en la lista de mantenimiento ocupado para eliminarlo
+                if(employeeId == w.getId()) {
+                    setMaintenanceEmployee(w);;
                     break;
                 }
             }

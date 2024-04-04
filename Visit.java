@@ -3,8 +3,6 @@ import java.util.Scanner;
 
 class Visit {
 
-    //CLASE SOLO PARA LIZETH
-
     
     Scanner intRead = new Scanner(System.in);
     Scanner string = new Scanner(System.in);
@@ -29,7 +27,7 @@ class Visit {
         return age = Integer.parseInt(parts[2]);
     }
 
-    int getBirthdate(){
+    int getVisitdate(){
         String date;
         String[] parts = visitDate.split("-");
         date = parts[1] + parts[0];
@@ -66,7 +64,7 @@ class Visit {
                         age = getAgeVisitDate() - 11;
                         visitorsToAdd.add(i);
                         if (i.getAgeBirthdate() < age) { //adultos
-                            if (getBirthdate() < i.getBirthdate()) { //por si nacio ese año y todavia es un niño
+                            if (getVisitdate() < i.getBirthdate()) { //por si nacio ese año y todavia es un niño
                                 kids++;
                                 if (i.getNumberVisits() == 4) { //por si tienen 5 visitas
                                     price = 50 - 10;
@@ -130,7 +128,7 @@ class Visit {
                 for(int x = 0; x < 7; x++) {
                     if(visitDay.equalsIgnoreCase(guideSchedule[0][x])) {
                         boolean band1 = true;
-                        if (guideSchedule[1][x].isEmpty() == false) {
+                        if(guideSchedule[1][x].isEmpty() == false) {
                             if(getVisitHour(visitHour) >= getHours(guideSchedule[1][x], band1) && getVisitHour(visitHour) <= getHours(guideSchedule[1][x], band1 = false)) { //puede fallar en la condicion
                                 guideId = i.getId();
                                 guide = String.format("%s %s \nID del guía: %d",  i.getName(), i.getLastName(), guideId);   

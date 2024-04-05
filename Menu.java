@@ -267,7 +267,7 @@ public class Menu {
                         case 11: 
                             System.out.print("\nIngrese el ID del mantenimiento que desea finalizar: ");
                             id = intRead.nextInt();
-                            zoo.endMaintenance(id);;
+                            zoo.endMaintenance(id);
                             break;
 
                         case 12: 

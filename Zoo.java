@@ -310,11 +310,11 @@ class Zoo {
                     }
                 }
             }
-            if(band2 == true) {
+            if(band == true) {
+                busyGuides.remove(guideDeleted);
                 System.out.println("\nVisita finalizada"); 
             }
-            else if(band == true) {
-                busyGuides.remove(guideDeleted);
+            else if(band2 == true) {
                 System.out.println("\nVisita finalizada"); 
             }
             else {
@@ -353,11 +353,11 @@ class Zoo {
                     }
                 }
             }
-            if(band2 == true) {
+            if(band == true) {
+                busyMaintenance.remove(maintenanceDeleted);
                 System.out.println("\nMantenimiento finalizado"); //CAMBIOS AQUI
             }
-            else if(band == true) { //CAMVIOS AQUI
-                busyMaintenance.remove(maintenanceDeleted);
+            else if(band2 == true) { //CAMVIOS AQUI
                 System.out.println("\nMantenimiento finalizado"); //CAMBIOS AQUI
             }
             else {

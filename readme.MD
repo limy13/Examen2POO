@@ -1,4 +1,4 @@
-# Examen 2 POO
+# Examen 2 POO Java
 
 Integrantes: 
 

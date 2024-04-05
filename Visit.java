@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Visit {
-
     
     Scanner intRead = new Scanner(System.in);
     Scanner string = new Scanner(System.in);

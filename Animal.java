@@ -71,7 +71,7 @@ class Animal {
 
     String getData(){
         if (diseases.isEmpty()){
-            return String.format("Animal ID: %d \nTipo de Animal: %s \nFecha de nacimiento: %s \nFecha de ingreso: %s \nPeso: %.2f kg \nEnfermedades: No diseases \nFrecuencia de alimentación: %s \nTipo de alimentación: %s \nCuenta con vacunas: %s\n",
+            return String.format("Animal ID: %d \nTipo de Animal: %s \nFecha de nacimiento: %s \nFecha de ingreso: %s \nPeso: %.2f kg \nEnfermedades: Sin enfermedades \nFrecuencia de alimentación: %s \nTipo de alimentación: %s \nCuenta con vacunas: %s\n",
              animalId, animalType, birthdate, arrivalDate, weight, feedingFrequency, feedingType, hasVaccines);
         }
         else{

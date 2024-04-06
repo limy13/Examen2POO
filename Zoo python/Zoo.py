@@ -88,7 +88,7 @@ class Zoo:
         self.busy_guides.append(new_busy_guides)
 
     def set_animal_id(self):
-        self.animal_id = 0
+        self.animal_id = animalId - 1
 
     def show_employees(self):  # Muestra información de todos los empleados
         if not self.employees:

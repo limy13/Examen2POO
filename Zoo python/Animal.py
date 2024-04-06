@@ -48,6 +48,6 @@ class Animal:
 
     def getData(self):
         if not self.diseases:
-            return f"Animal ID: {self.animalId} \nTipo de Animal: {self.animalType} \nFecha de nacimiento: {self.birthdate} \nFecha de ingreso: {self.arrivalDate} \nPeso: {self.weight:.2f} kg \nEnfermedades: No diseases \nFrecuencia de alimentación: {self.feedingFrequency} \nTipo de alimentación: {self.feedingType} \nCuenta con vacunas: {self.hasVaccines}\n"
+            return f"Animal ID: {self.animalId} \nTipo de Animal: {self.animalType} \nFecha de nacimiento: {self.birthdate} \nFecha de ingreso: {self.arrivalDate} \nPeso: {self.weight:.2f} kg \nEnfermedades: Sin enfermedades \nFrecuencia de alimentación: {self.feedingFrequency} \nTipo de alimentación: {self.feedingType} \nCuenta con vacunas: {self.hasVaccines}\n"
         else:
             return f"Animal ID: {self.animalId} \nTipo de Animal: {self.animalType} \nFecha de nacimiento: {self.birthdate} \nFecha de ingreso: {self.arrivalDate} \nPeso: {self.weight:.2f} kg \nEnfermedades: {', '.join(self.diseases)} \nFrecuencia de alimentación: {self.feedingFrequency} \nTipo de alimentación: {self.feedingType} \nCuenta con vacunas: {self.hasVaccines}\n"

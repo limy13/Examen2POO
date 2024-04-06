@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class Zoo {
 
-    // ESTA CLASE SE UTILIZZA PARA GUARDAR VISITANTES, EMPLEADOS, ANIMALES, ETC ADEMAS DE MOSTRAR DICHOS OBJETOS.
+    // ESTA CLASE SE UTILIZZA PARA GUARDAR VISITANTES, EMPLEADOS, ANIMALES, ETC ADEMAS DE MOSTRAR DICHOS OBJETOS
     
     private ArrayList<Employee> employees = new ArrayList<Employee>(); // ArrayList para almacenar empleados
     private ArrayList<Animal> animals = new ArrayList<Animal>(); // ArrayList para almacenar animales

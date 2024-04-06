@@ -135,7 +135,7 @@ class Zoo {
     }
 
     void setAnimalId() {
-        animalId = 0;
+        animalId = animalId - 1;
     }
 
     void showEmployees(){ //muestra info de todos los empleados
